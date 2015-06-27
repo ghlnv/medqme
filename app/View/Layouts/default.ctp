@@ -26,6 +26,15 @@
 		echo $this->Html->meta('icon');
 
 		echo $this->Html->css('layout');
+		echo $this->Html->css('jquery-ui.min');
+		echo $this->Html->css('jquery-ui.structure.min');
+		echo $this->Html->css('jquery-ui.theme.min');
+		
+		echo $this->Html->script('jquery-2.1.4.min');
+		echo $this->Html->script('jquery-ui.min');
+		echo $this->Html->script('jquery.mask');
+		echo $this->Html->script('custom-default');
+		echo $this->Html->script('custom-dialogs');
 
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
