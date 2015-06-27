@@ -34,6 +34,7 @@
 		echo $this->Html->script('jquery-ui.min');
 		echo $this->Html->script('jquery.mask');
 		echo $this->Html->script('custom-default');
+		echo $this->Html->script('custom-ajax');
 		echo $this->Html->script('custom-dialogs');
 
 		echo $this->fetch('meta');
@@ -67,6 +68,9 @@
 			</div>
 		</footer>
 	</div>
-	<?php echo $this->element('sql_dump'); ?>
+	<?php
+		echo $this->element('sql_dump');
+		echo $this->Js->writeBuffer();
+	?>	
 </body>
 </html>

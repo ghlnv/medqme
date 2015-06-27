@@ -154,6 +154,7 @@ div.actions h3 {
 
 /** Tables **/
 table {
+	border-top: 0.1em solid #DDD;
 	border-right:0;
 	clear: both;
 	color: #333;
@@ -180,7 +181,7 @@ th a.desc:after {
 table tr td {
 	padding: 6px;
 	text-align: left;
-	vertical-align: top;
+	vertical-align: middle;
 	border-bottom:1px solid #ddd;
 }
 table tr:nth-child(even) {
@@ -278,13 +279,12 @@ dd {
 /** Forms **/
 form {
 	clear: both;
-	margin-right: 20px;
 	padding: 0;
-	width: 95%;
+	width: 100%;
 }
 fieldset {
 	border: none;
-	margin-bottom: 1em;
+	margin-bottom: .5em;
 	padding: 16px 10px;
 }
 fieldset legend {
@@ -305,8 +305,7 @@ fieldset fieldset div {
 	margin: 0 20px;
 }
 form div {
-	clear: both;
-	margin-bottom: 1em;
+	margin-bottom: .5em;
 	padding: .5em;
 	vertical-align: text-top;
 }
@@ -332,7 +331,6 @@ label {
 	margin-bottom:3px;
 }
 input, textarea {
-	clear: both;
 	font-size: 140%;
 	font-family: "frutiger linotype", "lucida grande", "verdana", sans-serif;
 	padding: 1%;
@@ -760,7 +758,30 @@ pre {
 	display:none;
 }
 
+/******************************************************************************/
 /* Extra **********************************************************************/
+table>tbody>tr:hover>td {
+	background-color: #D5EBD5;
+}
 .login {
 	color: #22314e;
+}
+.ajaxFlashMessage {
+	background: #1C3339;
+	padding: 0.5em;
+	position: fixed;
+	top: 0;
+	right: 0;
+	z-index: 9999999999;
+}
+.ajaxload {
+	width: 100%;
+	height: 50px;
+	background-image: url(../img/ajax-loader.gif);
+	background-repeat: no-repeat;
+	background-position: center;
+}
+.line {
+	background: #DDD;
+	height: 0.1em;
 }

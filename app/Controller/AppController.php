@@ -56,7 +56,7 @@ class AppController extends Controller {
 		'Session',
 		'Role',
 		'RequestHandler',
-//		'DebugKit.Toolbar',
+		'DebugKit.Toolbar' => array('panels' => array('history' => false)),
 //		'Captcha',
 	);
 	public $helpers = array(
@@ -68,28 +68,111 @@ class AppController extends Controller {
 //		'Gerar',
 	);
 	
+	// #########################################################################
+	// Métodos #################################################################
+	public function beforeFilter() {
+		parent::beforeFilter();
+		$this->dataToParam();
+	}
+	public function beforeRender() {
+		parent::beforeRender();
+		$this->paramToData();
+	}
 	public function isAuthorized($user = null) {
 		if (isset($this->request->params['admin'])) {
 			return $this->Role->isAdmin();
 		}
-		else if (isset($this->request->params['atendente'])) {
-			return $this->Role->isAtendente();
-		}
-		else if (isset($this->request->params['recepcionista'])) {
-			return $this->Role->isRecepcionista();
-		}
-		else if (isset($this->request->params['saude'])) {
-			return $this->Role->isSaude();
-		}
-		else if (isset($this->request->params['saudebasica'])) {
-			return $this->Role->isSaudeBasica();
-		}
-		else if (isset($this->request->params['gerente'])) {
-			return $this->Role->isGerente();
-		}
-		else if (isset($this->request->params['medico'])) {
-			return $this->Role->isMedico();
-		}
 		return true;
+	}
+	
+	public function contentReload() {
+		$contentReload = $this->referer();
+		$this->set(compact('contentReload'));
+	}
+	public function windowOpenerReload() {
+		echo '<script>';
+		//'window.opener.location.href = window.opener.location.href;';
+		echo 'window.opener.location.reload( false );';
+		echo '</script>';
+	}
+	public function windowReload() {
+		echo '<div style="padding: 20px; text-align: center;">';
+		echo 'recarregando...';
+		echo '</div>';
+		echo '<script>';
+		echo 'window.location.reload( false );';
+		echo '</script>';
+		exit;
+	}
+	public function windowClose() {
+		echo '<div style="padding: 20px; text-align: center;">';
+		echo 'fechando...';
+		echo '</div>';
+		echo '<script>';
+		echo 'window.close();';
+		echo '</script>';
+		exit;
+	}
+	public function windowRedirect($url) {
+		$url = Router::url($url);
+		
+		echo '<div style="padding: 20px; text-align: center;">';
+		echo 'recarregando...';
+		echo '</div>';
+		echo '<script>';
+		echo "window.location.href = '$url';";
+		echo '</script>';
+		exit;
+	}
+	public function fecharDialog() {
+		$this->set('fecharDialog', true);
+	}
+	public function setAjaxFlashMessage($text) {
+		$this->set('ajaxFlashMessage', $text);
+	}
+	
+	public function retornarParaRota() {
+		if($this->Role->isAdmin(AuthComponent::user())) {
+			$this->redirect(array(
+				'admin' => true,
+			));
+		}
+	}
+	
+	// #########################################################################
+	// Métodos privados ########################################################
+	private function dataToParam() {
+		if (!empty($this->request->data['Filtro'])) {
+			$url = array();
+			foreach($this->request->data['Filtro'] as $filtro => $valor) {
+				if(is_array($valor)) {
+					$valor = implode(';',$valor);
+				}
+				else {
+					$valor = trim($valor);
+				}
+				if($valor) {
+					$url[$filtro] = $valor;
+				}
+			}
+			if(!empty($this->request->params['pass'])) {
+				$url = array_merge($url, $this->request->params['pass']);
+			}
+			if(!empty($this->request->params['named'])) {
+				$url = array_merge($url, $this->request->params['named']);
+			}
+				
+			$this->redirect($url);
+		}
+	}
+	private function paramToData() {
+		if (!empty($this->request->params['named'])) {
+			$this->request->data['Filtro'] = $this->request->params['named'];
+			foreach($this->request->data['Filtro'] as $filtro => $valor) {
+				if(strpos($valor, ';')) {
+					$this->request->data['Filtro'][$filtro] = explode(';',$valor);
+				}
+			}
+		}
 	}
 }
