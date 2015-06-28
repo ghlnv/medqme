@@ -31,11 +31,45 @@ function medicamentos(&$view, &$medicamentos) {
 		$ret.= $medicamento['Medicamento']['nome'];
 		$ret.= $view->Html->tag('/b');
 		
-//		$ret.= $view->Html->tag('div', null, array('style' => 'font-size: 0.9em;'));
-//		$ret.= ' - ';
-//		$ret.= $medicamento['Medicamento']['descricao'];
-//		$ret.= $view->Html->tag('/div');
-		$ret.= $view->Html->tag('/div');
+		if($medicamento['Medicamento']['principio_ativo']) {
+			$ret.= $view->Html->tag('div', null, array('class' => 'smallText'));
+			$ret.= $view->Html->tag('b');
+			$ret.= 'Princípio ativo: ';
+			$ret.= $view->Html->tag('/b');
+			$ret.= $medicamento['Medicamento']['principio_ativo'];
+			$ret.= $view->Html->tag('/div');
+			$ret.= $view->Html->tag('/div');
+		}
+		
+		if($medicamento['Medicamento']['laboratorio']) {
+			$ret.= $view->Html->tag('div', null, array('class' => 'smallText'));
+			$ret.= $view->Html->tag('b');
+			$ret.= 'Laboratório: ';
+			$ret.= $view->Html->tag('/b');
+			$ret.= $medicamento['Medicamento']['laboratorio'];
+			$ret.= $view->Html->tag('/div');
+			$ret.= $view->Html->tag('/div');
+		}
+		
+		if($medicamento['Medicamento']['apresentacao']) {
+			$ret.= $view->Html->tag('div', null, array('class' => 'smallText'));
+			$ret.= $view->Html->tag('b');
+			$ret.= 'Apresentação: ';
+			$ret.= $view->Html->tag('/b');
+			$ret.= $medicamento['Medicamento']['apresentacao'];
+			$ret.= $view->Html->tag('/div');
+			$ret.= $view->Html->tag('/div');
+		}
+		
+		if($medicamento['Medicamento']['classe_terapeutica']) {
+			$ret.= $view->Html->tag('div', null, array('class' => 'smallText'));
+			$ret.= $view->Html->tag('b');
+			$ret.= 'Classe terapêutica: ';
+			$ret.= $view->Html->tag('/b');
+			$ret.= $medicamento['Medicamento']['classe_terapeutica'];
+			$ret.= $view->Html->tag('/div');
+			$ret.= $view->Html->tag('/div');
+		}
 		$ret.= $view->Html->tag('/td');
 		
 		$ret.= $view->Html->tag('td', null, array('style' => 'line-height: 32px; text-align: center;'));

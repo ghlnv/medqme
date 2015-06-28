@@ -179,10 +179,11 @@ th a.desc:after {
 	content: ' ⇡';
 }
 table tr td {
-	padding: 6px;
+	padding: 0.3em 0.6em;
 	text-align: left;
 	vertical-align: middle;
 	border-bottom:1px solid #ddd;
+	line-height: 1.8em;
 }
 table tr:nth-child(even) {
 	background: #f9f9f9;
@@ -798,6 +799,16 @@ table>tbody>tr:hover>td {
 	background: #327E04;
 	color: #FFF;
 }
+.smallText {
+	font-size: 0.9em;
+	color: #666;
+}
 a img {
 	vertical-align: text-bottom;
+}
+.ui-autocomplete {
+	font-size: 0.9em !important;
+}
+.ui-dialog, .ui-dialog .ui-dialog-content {
+	overflow: visible !important;
 }

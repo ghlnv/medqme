@@ -19,6 +19,20 @@ class MedicamentosHelper extends AppHelper {
 		return $ret;
 	}
 	public function form() {
+		$medicamentoNomeId = String::uuid();
+		$urlAutocomplete = $this->Html->url(array(
+			'controller' => 'medicamentos',
+			'action' => 'autocompleteNome',
+		), true);
+		$this->Js->buffer("loadAutoComplete('#$medicamentoNomeId', '$urlAutocomplete');");
+		
+		$principioAtivoId = String::uuid();
+		$urlAutocomplete = $this->Html->url(array(
+			'controller' => 'medicamentos',
+			'action' => 'autocompletePrincipioAtivo',
+		), true);
+		$this->Js->buffer("loadAutoComplete('#$principioAtivoId', '$urlAutocomplete');");
+		
 		$ret = '';
 		$ret.= $this->Form->create('Medicamento', array(
 			'class' => 'ajax',
@@ -30,9 +44,11 @@ class MedicamentosHelper extends AppHelper {
 		));
 		$ret.= $this->Form->input('Medicamento.nome', array(
 			'div' => array('style' => 'width: 70%;'),
+			'id' => $medicamentoNomeId,
 		));
 		$ret.= $this->Form->input('Medicamento.principio_ativo', array(
 			'label' => 'Princípio Ativo',
+			'id' => $principioAtivoId,
 		));
 		$ret.= $this->Form->input('Medicamento.laboratorio', array(
 			'label' => 'Laboratório',

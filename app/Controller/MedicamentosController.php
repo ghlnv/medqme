@@ -17,6 +17,14 @@ class MedicamentosController extends AppController {
 
 	// #########################################################################
 	// Ações do admin ##########################################################
+	public function admin_autocompletePrincipioAtivo() {
+		$this->set('data', $this->Medicamento->principiosAtivosUnicos($_GET['term']));
+		$this->render('admin_jsonAutocomplete');
+	}
+	public function admin_autocompleteNome() {
+		$this->set('data', $this->Medicamento->nomesUnicos($_GET['term']));
+		$this->render('admin_jsonAutocomplete');
+	}
 	public function admin_cadastrar() {
 		if(!empty($this->request->data)) {
 			if($this->Medicamento->cadastrar($this->request->data)) {

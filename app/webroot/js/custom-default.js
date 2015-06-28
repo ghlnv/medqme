@@ -75,3 +75,9 @@ function loadMask() {
 		}
 	});
 }
+function loadAutoComplete(target, url) {
+	$( target ).autocomplete({
+		source: url,
+		minLength: 1
+	});
+}

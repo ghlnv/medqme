@@ -11,10 +11,42 @@ class Medicamento extends AppModel {
 				'message' => 'Campo obrigatório',
 			),
 		),
+		'principio_ativo' => array(
+			'notEmpty' => array(
+				'rule' => 'notempty',
+				'message' => 'Campo obrigatório',
+			),
+		),
 	);
 	
 	// #########################################################################
 	// Métodos #################################################################
+	public function principiosAtivosUnicos($keyword = null) {
+		$options = array(
+			'fields' => array('DISTINCT(Medicamento.principio_ativo) as principio_ativo'),
+			'conditions' => array(),
+			'contain' => false,
+			'limit' => 10,
+		);
+		if($keyword) {
+			$options['conditions']['Medicamento.principio_ativo LIKE'] = "%$keyword%";
+		}
+		$data = $this->find('all', $options);
+		return Set::extract('/Medicamento/principio_ativo', $data);
+	}
+	public function nomesUnicos($keyword = null) {
+		$options = array(
+			'fields' => array('DISTINCT(Medicamento.nome) as nome'),
+			'conditions' => array(),
+			'contain' => false,
+			'limit' => 10,
+		);
+		if($keyword) {
+			$options['conditions']['Medicamento.nome LIKE'] = "%$keyword%";
+		}
+		$data = $this->find('all', $options);
+		return Set::extract('/Medicamento/nome', $data);
+	}
 	public function importar($data) {
 		$medicamentos = explode("\n", rtrim($data['Medicamento']['parseable']));
 		foreach($medicamentos as $medicamento) {
