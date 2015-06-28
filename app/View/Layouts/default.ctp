@@ -56,10 +56,10 @@
 			?></div>
 		</header>
 		<div id="content">
-
-			<?php echo $this->Session->flash(); ?>
-
-			<?php echo $this->fetch('content'); ?>
+			<?php
+				echo $this->Session->flash();
+				echo $this->fetch('content');
+			?>
 		</div>
 		<footer>
 			<div class="clearfix">
@@ -69,7 +69,7 @@
 		</footer>
 	</div>
 	<?php
-		echo $this->element('sql_dump');
+//		echo $this->element('sql_dump');
 		echo $this->Js->writeBuffer();
 	?>	
 </body>

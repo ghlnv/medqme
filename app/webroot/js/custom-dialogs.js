@@ -1,3 +1,23 @@
+function loadDlgImportar() {
+	$(".dlgImportar").click(function() {
+		var dlgDoContent = createDialog($(this).attr("href"), $(this).attr("title"));
+		dlgDoContent.dialog({
+			draggable: false,
+			width: 350,
+			resizable: false,
+			position: { at: 'center top' },
+			buttons: {
+				"Importar": function() {
+					submitFormOrCloseDialog(this);
+				}
+			},
+			close: function(){
+				$(this).remove();
+			}
+		});	
+		return false;
+	});
+}
 function loadDlgVerPequeno() {
 	$(".dlgVerPequeno").click(function() {
 		var dlgDoContent = createDialog($(this).attr("href"), $(this).attr("title"));

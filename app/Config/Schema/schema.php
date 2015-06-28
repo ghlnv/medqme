@@ -16,9 +16,182 @@ class AppSchema extends CakeSchema {
 			'default' => NULL,
 			'key' => 'primary'
 		),
+		'codigo' => array(
+			'type' => 'string',
+			'length' => 8,
+			'null' => true,
+			'default' => NULL
+		),
+		'principio_ativo' => array(
+			'type' => 'string',
+			'null' => true,
+			'default' => NULL
+		),
+		'cnpj' => array(
+			'type' => 'string',
+			'null' => true,
+			'default' => NULL
+		),
+		'laboratorio' => array(
+			'type' => 'string',
+			'null' => true,
+			'default' => NULL
+		),
+		'codigo_ggrem' => array(
+			'type' => 'string',
+			'length' => 24,
+			'null' => true,
+			'default' => NULL
+		),
+		'ean' => array(
+			'type' => 'string',
+			'length' => 24,
+			'null' => true,
+			'default' => NULL
+		),
 		'nome' => array(
 			'type' => 'string',
 			'null' => false,
+			'default' => NULL
+		),
+		'apresentacao' => array(
+			'type' => 'text',
+			'null' => false,
+			'default' => NULL
+		),
+		'classe_terapeutica' => array(
+			'type' => 'string',
+			'null' => true,
+			'default' => NULL
+		),
+		'pf_0' => array(
+			'type' => 'float',
+			'null' => true,
+			'default' => NULL
+		),
+		'pf_12' => array(
+			'type' => 'float',
+			'null' => true,
+			'default' => NULL
+		),
+		'pf_17' => array(
+			'type' => 'float',
+			'null' => true,
+			'default' => NULL
+		),
+		'pf_18' => array(
+			'type' => 'float',
+			'null' => true,
+			'default' => NULL
+		),
+		'pf_19' => array(
+			'type' => 'float',
+			'null' => true,
+			'default' => NULL
+		),
+		'pf_17_zfm' => array(
+			'type' => 'float',
+			'null' => true,
+			'default' => NULL
+		),
+		'pmc_0' => array(
+			'type' => 'float',
+			'null' => true,
+			'default' => NULL
+		),
+		'pmc_12' => array(
+			'type' => 'float',
+			'null' => true,
+			'default' => NULL
+		),
+		'pmc_17' => array(
+			'type' => 'float',
+			'null' => true,
+			'default' => NULL
+		),
+		'pmc_18' => array(
+			'type' => 'float',
+			'null' => true,
+			'default' => NULL
+		),
+		'pmc_19' => array(
+			'type' => 'float',
+			'null' => true,
+			'default' => NULL
+		),
+		'pmc_17_zfm' => array(
+			'type' => 'float',
+			'null' => true,
+			'default' => NULL
+		),
+		'restricao_hospitalar' => array(
+			'type' => 'boolean',
+			'null' => true,
+			'default' => NULL
+		),
+		'cap' => array(
+			'type' => 'boolean',
+			'null' => true,
+			'default' => NULL
+		),
+		'confaz_87' => array(
+			'type' => 'boolean',
+			'null' => true,
+			'default' => NULL
+		),
+		'analise_recursal' => array(
+			'type' => 'string',
+			'null' => true,
+			'default' => NULL
+		),
+		'farmacia_popular' => array(
+			'type' => 'string',
+			'null' => true,
+			'default' => NULL
+		),
+		'apresentacao_reduzida' => array(
+			'type' => 'string',
+			'null' => true,
+			'default' => NULL
+		),
+		'formas_farmaceuticas_solidas' => array(
+			'type' => 'string',
+			'null' => true,
+			'default' => NULL
+		),
+		'formas_farmaceuticas_liquidas' => array(
+			'type' => 'string',
+			'null' => true,
+			'default' => NULL
+		),
+		'formas_farmaceuticas_semisolidas' => array(
+			'type' => 'string',
+			'null' => true,
+			'default' => NULL
+		),
+		'formas_farmaceuticas_gasosas' => array(
+			'type' => 'string',
+			'null' => true,
+			'default' => NULL
+		),
+		'vias_de_administracao' => array(
+			'type' => 'string',
+			'null' => true,
+			'default' => NULL
+		),
+		'embalagens_primarias' => array(
+			'type' => 'string',
+			'null' => true,
+			'default' => NULL
+		),
+		'embalagens_secundarias' => array(
+			'type' => 'string',
+			'null' => true,
+			'default' => NULL
+		),
+		'acessorios' => array(
+			'type' => 'string',
+			'null' => true,
 			'default' => NULL
 		),
 		'created' => array(

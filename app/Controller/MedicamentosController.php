@@ -21,13 +21,24 @@ class MedicamentosController extends AppController {
 		if(!empty($this->request->data)) {
 			if($this->Medicamento->cadastrar($this->request->data)) {
 				$this->Session->setFlash(__('Medicamento cadastrado com sucesso!', true), 'flash/success');
-				$this->windowReload();
+				$this->contentReload();
 			}
 			else {
 				$this->Session->setFlash(__('Medicamento NÃO cadastrado. Verifique os erros no formulário.', true));
 			}
 		}
 //		$this->set('pessoas', $this->Pessoa->listarMedicos());
+	}
+	public function admin_importar() {
+		if(!empty($this->request->data)) {
+			if($this->Medicamento->importar($this->request->data)) {
+				$this->Session->setFlash(__('Medicamentos importados com sucesso!', true), 'flash/success');
+				$this->windowReload();
+			}
+			else {
+				$this->Session->setFlash(__('Medicamentos NÃO importados. Verifique os erros no formulário.', true));
+			}
+		}
 	}
 	public function admin_excluir($ausenciaId) {
 		if (!$ausenciaId) {

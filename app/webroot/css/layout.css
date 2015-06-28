@@ -305,9 +305,11 @@ fieldset fieldset div {
 	margin: 0 20px;
 }
 form div {
-	margin-bottom: .5em;
+	box-sizing: border-box;
+	display: inline-block;
 	padding: .5em;
 	vertical-align: text-top;
+	width: 100%;
 }
 form .input {
 	color: #444;
@@ -331,9 +333,8 @@ label {
 	margin-bottom:3px;
 }
 input, textarea {
-	font-size: 140%;
 	font-family: "frutiger linotype", "lucida grande", "verdana", sans-serif;
-	padding: 1%;
+	padding: .3em;
 	width:98%;
 }
 select {
@@ -349,8 +350,6 @@ option {
 	padding: 0 3px;
 }
 input[type=checkbox] {
-	clear: left;
-	float: left;
 	margin: 0px 6px 7px 2px;
 	width: auto;
 }
@@ -358,7 +357,6 @@ div.checkbox label {
 	display: inline;
 }
 input[type=radio] {
-	float:left;
 	width:auto;
 	margin: 6px 0;
 	padding: 0;
@@ -784,4 +782,22 @@ table>tbody>tr:hover>td {
 .line {
 	background: #DDD;
 	height: 0.1em;
+}
+.botao {
+	display: inline-block;
+	background: #459E00;
+	border: 0.1em solid #888;
+	border-radius: 0.4em;
+	color: #FFF;
+	font-family: segoe ui,Arial,sans-serif;
+	font-size: 12px;
+	padding: 0.4em;
+	text-decoration: none;
+}
+.botao:hover {
+	background: #327E04;
+	color: #FFF;
+}
+a img {
+	vertical-align: text-bottom;
 }

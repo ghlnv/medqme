@@ -1,29 +1,33 @@
 <?php
-echo gerarMedicamentos($this, $medicamentos);
+echo medicamentos($this, $medicamentos);
 
 $this->Js->buffer('loadDlgEditarPadrao();');
 $this->Js->buffer('loadDlgCadastrarPadrao();');
+$this->Js->buffer('loadDlgImportar();');
 $this->Js->buffer('loadDatePicker();');
 
-function gerarMedicamentos(&$view, &$medicamentos) {
+function medicamentos(&$view, &$medicamentos) {
 	$ret = '';
 	$ret.= $view->Html->tag('h1');
 	$ret.= __('Medicamentos');
-	$ret.= gerarLinkParaCadastrarMedicamento($view);
+	$ret.= linkParaCadastrarMedicamento($view);
+	$ret.= linkParaImportar($view);
 	$ret.= $view->Html->tag('/h1');
-//	$ret.= gerarBusca($view);
+//	$ret.= busca($view);
 	$ret.= $view->Html->tag('div', '', array('class' => 'line'));
 
 	$ret.= $view->Html->tag('table');
 	foreach($medicamentos as $medicamento) {
 		$ret.= $view->Html->tag('tr');
-		$ret.= $view->Html->tag('td', null, array('style' => 'width: 50%;'));
+		$ret.= $view->Html->tag('td', null, array('style' => 'width: 90%;'));
 		$ret.= $view->Html->tag('div', null, array(
 			'style' => ''
 		));
 		$ret.= $view->Html->tag('b');
-		$ret.= $view->Time->format('d/m/Y', $medicamento['Medicamento']['created']);
-		$ret.= ' - ';
+		if($medicamento['Medicamento']['codigo']) {
+			$ret.= $medicamento['Medicamento']['codigo'];
+			$ret.= ' - ';
+		}
 		$ret.= $medicamento['Medicamento']['nome'];
 		$ret.= $view->Html->tag('/b');
 		
@@ -34,12 +38,9 @@ function gerarMedicamentos(&$view, &$medicamentos) {
 		$ret.= $view->Html->tag('/div');
 		$ret.= $view->Html->tag('/td');
 		
-		$ret.= $view->Html->tag('td');
-		$ret.= $view->Html->tag('/td');
-		
 		$ret.= $view->Html->tag('td', null, array('style' => 'line-height: 32px; text-align: center;'));
-		$ret.= gerarLinkParaEditarMedicamento($view, $medicamento['Medicamento']);
-		$ret.= gerarLinkParaExcluirMedicamento($view, $medicamento['Medicamento']);
+		$ret.= linkParaEditarMedicamento($view, $medicamento['Medicamento']);
+		$ret.= linkParaExcluirMedicamento($view, $medicamento['Medicamento']);
 		$ret.= $view->Html->tag('/td');
 		$ret.= $view->Html->tag('/tr');
 	}
@@ -48,7 +49,7 @@ function gerarMedicamentos(&$view, &$medicamentos) {
 	return $ret;
 
 }
-function gerarBusca(&$view) {
+function busca(&$view) {
 	$ret = '';
 	$ret.= $view->Form->create('Filtro', array(
 		'url' => array_merge(
@@ -84,22 +85,37 @@ function gerarBusca(&$view) {
 	$ret.= $view->Form->end();
 	return $ret;
 }
-function gerarLinkParaCadastrarMedicamento(&$view) {
-	return $view->Html->link($view->Html->image('icons/toggle_add.png'),
+function linkParaCadastrarMedicamento(&$view) {
+	return $view->Html->link($view->Html->image('icons/toggle_add.png').' novo',
 		array(
 			'admin' => true,
 			'controller' => 'medicamentos',
 			'action' => 'cadastrar',
 		),
 		array(
-			'class' => 'dlgCadastrarPadrao',
+			'class' => 'dlgCadastrarPadrao botao',
 			'title' => 'Cadastrar medicamento',
 			'style' => 'margin-left: 1em;',
 			'escape' => false
 		)
 	);
 }
-function gerarLinkParaExcluirMedicamento(&$view, &$medicamento) {
+function linkParaImportar(&$view) {
+	return $view->Html->link($view->Html->image('icons/upload-16.png').' importar',
+		array(
+			'admin' => true,
+			'controller' => 'medicamentos',
+			'action' => 'importar',
+		),
+		array(
+			'class' => 'dlgImportar botao',
+			'title' => 'Importar medicamentos',
+			'style' => 'margin-left: 1em;',
+			'escape' => false
+		)
+	);
+}
+function linkParaExcluirMedicamento(&$view, &$medicamento) {
 	return $view->Html->link($view->Html->image('icons/delete-16.png'),
 		array(
 			'admin' => true,
@@ -108,14 +124,14 @@ function gerarLinkParaExcluirMedicamento(&$view, &$medicamento) {
 			$medicamento['id'],
 		),
 		array(
-			'title' => 'Excluir documento sugerido',
+			'title' => 'Excluir medicamento',
 			'style' => 'margin: 0 0.5em;',
 			'confirm' => 'Tem certeza que deseja excluir este medicamento?',
 			'escape' => false
 		)
 	);
 }
-function gerarLinkParaEditarMedicamento(&$view, &$medicamento) {
+function linkParaEditarMedicamento(&$view, &$medicamento) {
 	return $view->Html->link($view->Html->image('icons/edit-16.png'),
 		array(
 			'admin' => true,
@@ -125,7 +141,7 @@ function gerarLinkParaEditarMedicamento(&$view, &$medicamento) {
 		),
 		array(
 			'class' => 'dlgEditarPadrao',
-			'title' => 'Editar documento sugerido',
+			'title' => 'Editar medicamento',
 			'style' => 'margin: 0 0.5em;',
 			'escape' => false
 		)
