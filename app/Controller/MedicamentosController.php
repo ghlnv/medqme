@@ -35,7 +35,6 @@ class MedicamentosController extends AppController {
 				$this->Session->setFlash(__('Medicamento NÃO cadastrado. Verifique os erros no formulário.', true));
 			}
 		}
-//		$this->set('pessoas', $this->Pessoa->listarMedicos());
 	}
 	public function admin_importar() {
 		if(!empty($this->request->data)) {
@@ -59,9 +58,24 @@ class MedicamentosController extends AppController {
 		}
 		$this->redirect($this->referer());
 	}
+	public function admin_editarPrecos($id) {
+		if (!empty($this->request->data)) {
+			if ($this->Medicamento->atualizarPrecos($this->request->data)) {
+				$this->Session->setFlash(__('Medicamento atualizado com sucesso.', true), 'flash/success');
+				$this->contentReload();
+				$this->fecharDialog();
+			}
+			else {
+				$this->Session->setFlash(__('Medicamento NÃO atualizado. Verifique os erros no formulário.', true));
+			}
+		}
+		else {
+			$this->request->data = $this->Medicamento->buscar($id);
+		}
+	}
 	public function admin_editar($id) {
 		if (!empty($this->request->data)) {
-			if ($this->Medicamento->save($this->request->data)) {
+			if ($this->Medicamento->atualizar($this->request->data)) {
 				$this->Session->setFlash(__('Medicamento atualizado com sucesso.', true), 'flash/success');
 				$this->contentReload();
 				$this->fecharDialog();
@@ -75,14 +89,19 @@ class MedicamentosController extends AppController {
 		}
 	}
 	public function admin_index() {
-		if(!empty($this->request->params['named']['data_minima'])) {
-			$this->paginate['Medicamento']['conditions']['Medicamento.data >='] = date('Y-m-d', strtotime($this->request->params['named']['data_minima']));
-		}
-		if(!empty($this->request->params['named']['data_maxima'])) {
-			$this->paginate['Medicamento']['conditions']['Medicamento.data <='] = date('Y-m-d', strtotime($this->request->params['named']['data_maxima']));
-		}
-		if(!empty($this->request->params['named']['pessoa_id'])) {
-			$this->paginate['Medicamento']['conditions']['Medicamento.pessoa_id'] = $this->request->params['named']['pessoa_id'];
+		if(!empty($this->request->params['named']['keyword'])) {
+			$tokens = explode(' ', trim($this->request->params['named']['keyword']));
+			foreach($tokens as $token) {
+				$this->paginate['Medicamento']['conditions'][]['OR'] = array(
+					'Medicamento.codigo' => "%$token%",
+					'Medicamento.principio_ativo LIKE' => "%$token%",
+					'Medicamento.laboratorio LIKE' => "%$token%",
+					'Medicamento.codigo_ggrem LIKE' => "%$token%",
+					'Medicamento.nome LIKE' => "%$token%",
+					'Medicamento.apresentacao LIKE' => "%$token%",
+					'Medicamento.classe_terapeutica LIKE' => "%$token%",
+				);
+			}
 		}
 		$this->paginate['Medicamento']['contain'] = false;
 		$this->set('medicamentos', $this->paginate('Medicamento'));

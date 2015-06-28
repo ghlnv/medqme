@@ -52,7 +52,7 @@ class Medicamento extends AppModel {
 		foreach($medicamentos as $medicamento) {
 			$medicamento = explode("\t", rtrim($medicamento));
 			$medicamento = array(
-				'id' => $this->field('id', array('nome' => $this->parserItem($medicamento, 6))),
+				'id' => $this->field('id', array('codigo_ggrem' => $this->parserItem($medicamento, 4))),
 				'codigo' => $this->parserItem($medicamento, 0),
 				'principio_ativo' => $this->parserItem($medicamento, 1),
 				'cnpj' => $this->parserItem($medicamento, 2),
@@ -63,20 +63,20 @@ class Medicamento extends AppModel {
 				'apresentacao' => $this->parserItem($medicamento, 7),
 				'classe_terapeutica' => $this->parserItem($medicamento, 8),
 				'pf_0' => $this->parserItem($medicamento, 9),
-				'pf_12' => $this->parserItem($medicamento, 10),
-				'pf_17' => $this->parserItem($medicamento, 11),
-				'pf_18' => $this->parserItem($medicamento, 12),
-				'pf_19' => $this->parserItem($medicamento, 13),
-				'pf_17_zfm' => $this->parserItem($medicamento, 14),
-				'pmc_0' => $this->parserItem($medicamento, 15),
-				'pmc_12' => $this->parserItem($medicamento, 16),
-				'pmc_17' => $this->parserItem($medicamento, 17),
-				'pmc_18' => $this->parserItem($medicamento, 18),
-				'pmc_19' => $this->parserItem($medicamento, 19),
-				'pmc_17_zfm' => $this->parserItem($medicamento, 20),
-				'restricao_hospitalar' => $this->parserItem($medicamento, 21),
-				'cap' => $this->parserItem($medicamento, 22),
-				'confaz_87' => $this->parserItem($medicamento, 23),
+				'pf_12' => $this->fixBrNumber($this->parserItem($medicamento, 10)),
+				'pf_17' => $this->fixBrNumber($this->parserItem($medicamento, 11)),
+				'pf_18' => $this->fixBrNumber($this->parserItem($medicamento, 12)),
+				'pf_19' => $this->fixBrNumber($this->parserItem($medicamento, 13)),
+				'pf_17_zfm' => $this->fixBrNumber($this->parserItem($medicamento, 14)),
+				'pmc_0' => $this->fixBrNumber($this->parserItem($medicamento, 15)),
+				'pmc_12' => $this->fixBrNumber($this->parserItem($medicamento, 16)),
+				'pmc_17' => $this->fixBrNumber($this->parserItem($medicamento, 17)),
+				'pmc_18' => $this->fixBrNumber($this->parserItem($medicamento, 18)),
+				'pmc_19' => $this->fixBrNumber($this->parserItem($medicamento, 19)),
+				'pmc_17_zfm' => $this->fixBrNumber($this->parserItem($medicamento, 20)),
+				'restricao_hospitalar' => $this->booleanSimNao($this->parserItem($medicamento, 21)),
+				'cap' => $this->booleanSimNao($this->parserItem($medicamento, 22)),
+				'confaz_87' => $this->booleanSimNao($this->parserItem($medicamento, 23)),
 				'analise_recursal' => $this->parserItem($medicamento, 24),
 				'farmacia_popular' => $this->parserItem($medicamento, 25),
 				'apresentacao_reduzida' => $this->parserItem($medicamento, 26),
@@ -90,6 +90,7 @@ class Medicamento extends AppModel {
 				'acessorios' => $this->parserItem($medicamento, 34),
 			);
 			if(!$this->save($medicamento)) {
+				$this->log(debug($medicamento));
 				return false;
 			}
 		}
@@ -104,6 +105,21 @@ class Medicamento extends AppModel {
 		));
 	}
 	public function atualizar($data) {
+		return $this->save($data);
+	}
+	public function atualizarPrecos($data) {
+		$data['Medicamento']['pf_0'] = $this->fixBrNumber($data['Medicamento']['pf_0']);
+		$data['Medicamento']['pf_12'] = $this->fixBrNumber($data['Medicamento']['pf_12']);
+		$data['Medicamento']['pf_17'] = $this->fixBrNumber($data['Medicamento']['pf_17']);
+		$data['Medicamento']['pf_18'] = $this->fixBrNumber($data['Medicamento']['pf_18']);
+		$data['Medicamento']['pf_19'] = $this->fixBrNumber($data['Medicamento']['pf_19']);
+		$data['Medicamento']['pf_17_zfm'] = $this->fixBrNumber($data['Medicamento']['pf_17_zfm']);
+		$data['Medicamento']['pmc_0'] = $this->fixBrNumber($data['Medicamento']['pmc_0']);
+		$data['Medicamento']['pmc_12'] = $this->fixBrNumber($data['Medicamento']['pmc_12']);
+		$data['Medicamento']['pmc_17'] = $this->fixBrNumber($data['Medicamento']['pmc_17']);
+		$data['Medicamento']['pmc_18'] = $this->fixBrNumber($data['Medicamento']['pmc_18']);
+		$data['Medicamento']['pmc_19'] = $this->fixBrNumber($data['Medicamento']['pmc_19']);
+		$data['Medicamento']['pmc_17_zfm'] = $this->fixBrNumber($data['Medicamento']['pmc_17_zfm']);
 		return $this->save($data);
 	}
 	public function cadastrar($data) {

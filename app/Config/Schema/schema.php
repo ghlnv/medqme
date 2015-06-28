@@ -208,7 +208,31 @@ class AppSchema extends CakeSchema {
 			'PRIMARY' => array(
 				'column' => 'id',
 				'unique' => 1
-			)
+			),
+			'index_codigo' => array(
+				'column' => 'codigo',
+				'unique' => 0,
+			),
+			'index_principio_ativo' => array(
+				'column' => 'principio_ativo',
+				'unique' => 0,
+			),
+			'index_laboratorio' => array(
+				'column' => 'laboratorio',
+				'unique' => 0,
+			),
+			'index_codigo_ggrem' => array(
+				'column' => 'codigo_ggrem',
+				'unique' => 0,
+			),
+			'index_nome' => array(
+				'column' => 'nome',
+				'unique' => 0,
+			),
+			'index_classe_terapeutica' => array(
+				'column' => 'classe_terapeutica',
+				'unique' => 0,
+			),
 		),
 		'tableParameters' => array(
 			'charset' => 'utf8',

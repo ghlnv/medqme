@@ -13,8 +13,8 @@ function medicamentos(&$view, &$medicamentos) {
 	$ret.= linkParaCadastrarMedicamento($view);
 	$ret.= linkParaImportar($view);
 	$ret.= $view->Html->tag('/h1');
-//	$ret.= busca($view);
 	$ret.= $view->Html->tag('div', '', array('class' => 'line'));
+	$ret.= busca($view);
 
 	$ret.= $view->Html->tag('table');
 	foreach($medicamentos as $medicamento) {
@@ -29,6 +29,9 @@ function medicamentos(&$view, &$medicamentos) {
 			$ret.= ' - ';
 		}
 		$ret.= $medicamento['Medicamento']['nome'];
+		$ret.= ' [';
+		$ret.= $medicamento['Medicamento']['codigo_ggrem'];
+		$ret.= ']';
 		$ret.= $view->Html->tag('/b');
 		
 		if($medicamento['Medicamento']['principio_ativo']) {
@@ -74,6 +77,7 @@ function medicamentos(&$view, &$medicamentos) {
 		
 		$ret.= $view->Html->tag('td', null, array('style' => 'line-height: 32px; text-align: center;'));
 		$ret.= linkParaEditarMedicamento($view, $medicamento['Medicamento']);
+		$ret.= linkParaEditarPrecos($view, $medicamento['Medicamento']);
 		$ret.= linkParaExcluirMedicamento($view, $medicamento['Medicamento']);
 		$ret.= $view->Html->tag('/td');
 		$ret.= $view->Html->tag('/tr');
@@ -96,25 +100,12 @@ function busca(&$view) {
 	));
 
 	$ret.= $view->Form->submit('Buscar', array(
-		'div' => array('style' => 'clear: none; float: left; margin-bottom: 0; margin-right: 0.5em;'),
+		'div' => array('style' => 'width: auto; vertical-align: middle;'),
 	));
-	$ret.= $view->Form->input('Filtro.pessoa_id', array(
-		'div' => array('style' => 'float: left; margin-bottom: 0;'),
-		'label' => 'Profissionais de Saúde',
-		'empty' => '-- Todos --',
-		'style' => 'width: 11em;',
-	));
-	$ret.= $view->Form->input('Filtro.data_minima', array(
-		'div' => array('style' => 'float: left; margin-bottom: 0;'),
-		'label' => 'Data mínima',
-		'type' => 'text',
-		'class' => 'date',
-	));
-	$ret.= $view->Form->input('Filtro.data_maxima', array(
-		'div' => array('style' => 'float: left; margin-bottom: 0;'),
-		'label' => 'Data máxima',
-		'type' => 'text',
-		'class' => 'date',
+	$ret.= $view->Form->input('Filtro.keyword', array(
+		'div' => array('style' => 'width: auto; vertical-align: middle;'),
+		'label' => false,
+		'placeholder' => 'Palavras-chaves',
 	));
 	$ret.= $view->Form->end();
 	return $ret;
@@ -176,6 +167,22 @@ function linkParaEditarMedicamento(&$view, &$medicamento) {
 		array(
 			'class' => 'dlgEditarPadrao',
 			'title' => 'Editar medicamento',
+			'style' => 'margin: 0 0.5em;',
+			'escape' => false
+		)
+	);
+}
+function linkParaEditarPrecos(&$view, &$medicamento) {
+	return $view->Html->link($view->Html->image('icons/edit-blue-16.png'),
+		array(
+			'admin' => true,
+			'controller' => 'medicamentos',
+			'action' => 'editarPrecos',
+			$medicamento['id'],
+		),
+		array(
+			'class' => 'dlgEditarPadrao',
+			'title' => 'Editar preços do medicamento',
 			'style' => 'margin: 0 0.5em;',
 			'escape' => false
 		)

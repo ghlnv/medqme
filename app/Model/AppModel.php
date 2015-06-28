@@ -30,4 +30,14 @@ App::uses('Model', 'Model');
  * @package       app.Model
  */
 class AppModel extends Model {
+	
+	public function fixBrNumber($number) {
+		return str_replace(',', '.', str_replace('.', '', $number));
+	}
+	public function booleanSimNao($simNao) {
+		if('Sim' == $simNao) {
+			return true;
+		}
+		return false;
+	}
 }
