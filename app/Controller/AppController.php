@@ -34,15 +34,11 @@ class AppController extends Controller {
 	
 	public $components = array(
 		'Auth' => array(
-			'loginAction' => array(
-				'controller' => 'usuarios',
-				'action' => 'login',
-			),
+			'loginAction' => '/usuarios/login',
 			'loginRedirect' => '/',
 			'logoutRedirect' => '/usuarios/login',
 			'authorize' => 'Controller',
 			'authError' => 'Você não tem permissão para acessar este conteúdo',
-			'ajaxLogin' => 'ajax_login',
 			'authenticate' => array(
 				'Form' => array(
 					'userModel' => 'Usuario',
@@ -64,8 +60,6 @@ class AppController extends Controller {
 		'Form',
 		'Js',
 		'Session',
-//		'Util',
-//		'Gerar',
 	);
 	
 	// #########################################################################
@@ -73,6 +67,15 @@ class AppController extends Controller {
 	public function beforeFilter() {
 		parent::beforeFilter();
 		$this->dataToParam();
+		if($this->RequestHandler->isAjax()) {
+            if(!$this->Auth->user()) {
+				SessionComponent::setFlash('Sua sessão expirou, por favor faça novamente o login.', 'default', array(), 'auth');
+				
+				$url = Router::url('/usuarios/login');
+				echo "<script>window.location.href = '$url';</script>";
+				die();
+            }
+        }
 	}
 	public function beforeRender() {
 		parent::beforeRender();
