@@ -72,7 +72,7 @@ class AppController extends Controller {
 				SessionComponent::setFlash('Sua sessão expirou, por favor faça novamente o login.', 'default', array(), 'auth');
 				
 				$url = Router::url('/usuarios/login');
-				echo "<script>window.location.href = '$url';</script>";
+//				echo "<script>window.location.href = '$url';</script>";
 				die();
             }
         }
