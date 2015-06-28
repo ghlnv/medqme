@@ -280,6 +280,7 @@ dd {
 /** Forms **/
 form {
 	clear: both;
+	box-sizing: border-box;
 	padding: 0;
 	width: 100%;
 }
@@ -333,9 +334,10 @@ label {
 	margin-bottom:3px;
 }
 input, textarea {
+	box-sizing: border-box;
 	font-family: "frutiger linotype", "lucida grande", "verdana", sans-serif;
 	padding: .3em;
-	width:98%;
+	width: 100%;
 }
 select {
 	clear: both;
@@ -758,6 +760,19 @@ pre {
 }
 
 /******************************************************************************/
+/* Jquery-ui **********************************************************************/
+.ui-autocomplete {
+	font-size: 0.9em !important;
+}
+.ui-dialog, .ui-dialog .ui-dialog-content {
+	overflow: visible !important;
+}
+.ui-dialog-content {
+	box-sizing: border-box;
+	padding: .5em !important;
+}
+
+/******************************************************************************/
 /* Extra **********************************************************************/
 table>tbody>tr:hover>td {
 	background-color: #D5EBD5;
@@ -805,12 +820,6 @@ table>tbody>tr:hover>td {
 }
 a img {
 	vertical-align: text-bottom;
-}
-.ui-autocomplete {
-	font-size: 0.9em !important;
-}
-.ui-dialog, .ui-dialog .ui-dialog-content {
-	overflow: visible !important;
 }
 .money {
 	text-align: right;
