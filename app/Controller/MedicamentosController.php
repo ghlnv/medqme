@@ -93,7 +93,7 @@ class MedicamentosController extends AppController {
 			$tokens = explode(' ', trim($this->request->params['named']['keyword']));
 			foreach($tokens as $token) {
 				$this->paginate['Medicamento']['conditions'][]['OR'] = array(
-					'Medicamento.codigo' => "%$token%",
+					'Medicamento.codigo LIKE' => "%$token%",
 					'Medicamento.principio_ativo LIKE' => "%$token%",
 					'Medicamento.laboratorio LIKE' => "%$token%",
 					'Medicamento.codigo_ggrem LIKE' => "%$token%",

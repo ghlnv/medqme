@@ -3,7 +3,6 @@ class Medicamento extends AppModel {
 
 	public $displayField = 'nome';
 	public $order = array(
-		'Medicamento.classe_terapeutica' => 'ASC',
 		'Medicamento.codigo' => 'ASC',
 		'Medicamento.nome' => 'ASC',
 	);
