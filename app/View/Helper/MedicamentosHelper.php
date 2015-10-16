@@ -4,6 +4,114 @@ class MedicamentosHelper extends AppHelper {
 
 	// #########################################################################
 	// Métodos #################################################################
+	public function linkParaCadastrar() {
+		return $this->Html->link($this->Html->image('icons/toggle_add.png').' novo',
+			array(
+				'admin' => true,
+				'controller' => 'medicamentos',
+				'action' => 'cadastrar',
+			),
+			array(
+				'class' => 'dlgCadastrarPadrao btn btn-primary',
+				'title' => 'Cadastrar medicamento',
+				'style' => 'margin-left: 1em;',
+				'escape' => false
+			)
+		);
+	}
+	public function linkParaImportar() {
+		return $this->Html->link($this->Html->image('icons/upload-16.png').' importar',
+			array(
+				'admin' => true,
+				'controller' => 'medicamentos',
+				'action' => 'importar',
+			),
+			array(
+				'class' => 'dlgImportar btn btn-primary',
+				'title' => 'Importar medicamentos',
+				'style' => 'margin-left: 1em;',
+				'escape' => false
+			)
+		);
+	}
+	public function linkParaExcluir(&$medicamento) {
+		return $this->Html->link($this->Html->image('icons/remove-32.png'),
+			array(
+				'admin' => true,
+				'controller' => 'medicamentos',
+				'action' => 'excluir',
+				$medicamento['id'],
+			),
+			array(
+				'title' => 'Excluir medicamento',
+				'style' => 'margin: 0 0.5em;',
+				'confirm' => 'Tem certeza que deseja excluir este medicamento?',
+				'escape' => false
+			)
+		);
+	}
+	public function linkParaEditar(&$medicamento) {
+		return $this->Html->link($this->Html->image('icons/edit-32.png'),
+			array(
+				'admin' => true,
+				'controller' => 'medicamentos',
+				'action' => 'editar',
+				$medicamento['id'],
+			),
+			array(
+				'class' => 'dlgEditarPadrao',
+				'title' => 'Editar medicamento',
+				'style' => 'margin: 0 0.5em;',
+				'escape' => false
+			)
+		);
+	}
+	public function linkParaEditarPrecos(&$medicamento) {
+		return $this->Html->link($this->Html->image('icons/edit-blue-32.png'),
+			array(
+				'admin' => true,
+				'controller' => 'medicamentos',
+				'action' => 'editarPrecos',
+				$medicamento['id'],
+			),
+			array(
+				'class' => 'dlgEditarPadrao',
+				'title' => 'Editar preços do medicamento',
+				'style' => 'margin: 0 0.5em;',
+				'escape' => false
+			)
+		);
+	}
+	public function formBuscaPadrao() {
+		$ret = '';
+		$ret.= $this->Form->create('Filtro', array(
+			'url' => [
+				'controller' => $this->request->params['controller'],
+			],
+			'class' => 'form-inline',
+			'style' => 'margin-bottom: 10px; padding: 10px;',
+		));
+		$ret.= $this->Form->input('Filtro.keywords', array(
+			'div' => [
+				'class' => 'form-group col-md-4',
+				'style' => 'display: inline-block; float: none; padding: 0 5px 0 0; min-width: 200px;',
+			],
+			'label' => false,
+			'placeholder' => 'Palavras-chaves...',
+			'title' => 'Palavras-chaves...',
+			'class' => 'form-control',
+			'style' => 'width: 100%',
+		));
+		$ret.= $this->Form->submit('Buscar', array(
+			'div' => [
+				'class' => 'form-group col-md-2',
+				'style' => 'display: inline-block; float: none; padding: 0;',
+			],
+			'class' => 'btn btn-default',
+		));
+		$ret.= $this->Form->end();
+		return $ret;
+	}
 	public function formImport() {
 		$ret = '';
 		$ret.= $this->Form->create('Medicamento', array(

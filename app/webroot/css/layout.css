@@ -693,25 +693,6 @@ table>tbody>tr:hover>td {
 	background-repeat: no-repeat;
 	background-position: center;
 }
-.line {
-	background: #DDD;
-	height: 0.1em;
-}
-.botao {
-	display: inline-block;
-	background: #459E00;
-	border: 0.1em solid #888;
-	border-radius: 0.4em;
-	color: #FFF;
-	font-family: segoe ui,Arial,sans-serif;
-	font-size: 12px;
-	padding: 0.4em;
-	text-decoration: none;
-}
-.botao:hover {
-	background: #327E04;
-	color: #FFF;
-}
 .smallText {
 	font-size: 0.9em;
 	color: #666;

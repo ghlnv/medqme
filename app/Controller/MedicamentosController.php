@@ -89,8 +89,8 @@ class MedicamentosController extends AppController {
 		}
 	}
 	public function admin_index() {
-		if(!empty($this->request->params['named']['keyword'])) {
-			$tokens = explode(' ', trim($this->request->params['named']['keyword']));
+		if(!empty($this->request->params['named']['keywords'])) {
+			$tokens = explode(' ', trim($this->request->params['named']['keywords']));
 			foreach($tokens as $token) {
 				$this->paginate['Medicamento']['conditions'][]['OR'] = array(
 					'Medicamento.codigo LIKE' => "%$token%",
