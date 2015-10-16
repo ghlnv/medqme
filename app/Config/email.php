@@ -40,8 +40,11 @@
 class EmailConfig {
 
 	public $default = array(
-		'transport' => 'Mail',
-		'from' => 'you@localhost',
+//		'transport' => 'Mail',
+		'transport' => 'Debug',
+		'from' => array('noreply@medqme.com.br' => 'MedQMe'),
+		'emailFormat' => 'html',
+		'log' => true,
 		//'charset' => 'utf-8',
 		//'headerCharset' => 'utf-8',
 	);

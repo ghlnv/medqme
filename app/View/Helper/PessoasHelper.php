@@ -17,14 +17,40 @@ class PessoasHelper extends AppHelper {
 			],
 		));
 		$ret.= $this->Form->hidden('Pessoa.id');
+		$ret.= $this->Form->hidden('Usuario.id');
+		$ret.= $this->Form->input('Usuario.tipo', array(
+			'div' => array('style' => ''),
+			'type' => 'radio',
+			'legend' => false,
+			'options' => Configure::read('Usuario.tipos'),
+			'default' => 'Comum',
+			'class' => 'form-control',
+		));
 		$ret.= $this->Form->input('Pessoa.nome', array(
 			'div' => array('style' => ''),
 			'label' => 'Nome',
+			'class' => 'form-control',
 		));
 		$ret.= $this->Form->input('Pessoa.email', array(
 			'div' => array('style' => ''),
+			'class' => 'form-control',
 		));
-		$ret.= $this->Form->submit('Registrar');
+		$ret.= $this->Html->tag('div', null, [
+			'class' => 'row input',
+		]);
+		$ret.= $this->Form->input('Pessoa.cidade', array(
+			'div' => array('class' => 'col-md-6'),
+			'class' => 'form-control',
+		));
+		$ret.= $this->Form->input('Pessoa.estado', array(
+			'div' => array('class' => 'col-md-2'),
+			'class' => 'form-control',
+		));
+		$ret.= $this->Html->tag('/div');
+		$ret.= $this->Form->submit('Registrar', [
+			'div' => ['class' => 'input auto'],
+			'class' => 'btn btn-primary',
+		]);
 		$ret.= $this->Form->end();
 		$ret.= $this->Html->tag('/div');
 		$ret.= $this->Html->tag('/div');
@@ -91,6 +117,7 @@ class PessoasHelper extends AppHelper {
 
 		$ret.= $this->Form->submit('Salvar', array(
 			'div' => array(
+				'class' => 'input submit',
 				'style' => 'clear: both; float: left; margin-top: 0;',
 			),
 		));
@@ -162,6 +189,7 @@ class PessoasHelper extends AppHelper {
 			'class' => 'form-control',
 			'style' => 'width: 300px;'
 		));
+		$ret.= $this->Html->tag('br');
 		$ret.= $this->Form->input('Pessoa.telefone', array(
 			'div' => [
 				'class' => 'input auto',
@@ -185,7 +213,7 @@ class PessoasHelper extends AppHelper {
 			],
 			'type' => 'text',
 			'class' => 'form-control birth date',
-			'value' => $this->Gerar->brDate($this->request->data['Pessoa']['nascimento']),
+			'value' => $this->Gerar->brDate($this->request->data['Pessoa']['nascimento'], 'd-m-Y'),
 		));
 		$ret.= $this->Html->tag('br');
 
@@ -242,6 +270,7 @@ class PessoasHelper extends AppHelper {
 		$ret.= $this->Html->tag('br');
 		$ret.= $this->Form->submit('Salvar', array(
 			'div' => array(
+				'class' => 'input submit',
 				'style' => 'clear: both;',
 			),
 		));

@@ -1,4 +1,5 @@
 <?php
+echo $this->Html->tag('div', null, ['class' => 'container']);
 echo $this->Html->tag('h1');
 echo __('Medicamentos');
 echo $this->Medicamentos->linkParaCadastrar();
@@ -74,6 +75,7 @@ foreach($medicamentos as $medicamento) {
 }
 echo $this->Html->tag('/table');
 echo $this->element('paginator/rodape');
+echo $this->Html->tag('/div');
 
 $this->Js->buffer('loadDlgEditarPadrao();');
 $this->Js->buffer('loadDlgCadastrarPadrao();');

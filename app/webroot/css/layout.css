@@ -255,11 +255,15 @@ fieldset fieldset div {
 	clear: left;
 	margin: 0 20px;
 }
-form div {
+div.input {
 	box-sizing: border-box;
 	display: inline-block;
 	padding: .5em;
 	vertical-align: text-top;
+	width: 100%;
+}
+div.input.auto {
+	width: auto;
 }
 form .input {
 	color: #444;
@@ -299,32 +303,26 @@ option {
 	font-size: 120%;
 	padding: 0 3px;
 }
-.checkbox input[type=checkbox] {
+.checkbox input[type=checkbox],
+.radio input[type=radio] {
 	margin-left: 0;
+	height: auto;
 	width: auto;
 }
 div.checkbox label {
 	display: inline;
 }
-input[type=radio] {
-	width:auto;
-	margin: 6px 0;
-	padding: 0;
-	line-height: 26px;
+.radio {
+	margin-bottom: 0;
+	margin-top: 0;
+	line-height: 36px;
 }
-.radio label {
-	margin: 0 0 6px 20px;
-	line-height: 26px;
+.radio input[type=radio] {
+	margin-top: 12px;
 }
 input[type=submit] {
 	display: inline;
 	font-size: 110%;
-	width: auto;
-}
-div.input {
-	width: 100%;
-}
-div.input.auto {
 	width: auto;
 }
 form .submit input[type=submit] {
@@ -702,4 +700,11 @@ a img {
 }
 .money {
 	text-align: right;
+}
+.phone {
+	width: 150px;
+}
+.date {
+	cursor: pointer;
+	width: 120px;
 }

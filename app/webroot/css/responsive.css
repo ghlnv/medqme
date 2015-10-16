@@ -1,0 +1,26 @@
+@charset "utf-8";
+
+@media only screen and (max-width: 1200px) {
+	
+}
+@media only screen and (max-width: 1050px) {
+	
+}
+@media only screen and (max-width: 800px) {
+	.box.box-header .box-image {
+		height: 250px;
+	}
+	.box.box-header .box-avatar {
+		top: -160px;
+	}
+}
+@media only screen and (max-width: 650px) {
+	
+}
+
+@media only screen and (max-width: 550px) {
+	
+}
+@media only screen and (max-width: 400px) {
+	
+}

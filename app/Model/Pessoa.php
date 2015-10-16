@@ -178,6 +178,15 @@ class Pessoa extends AppModel {
 			'contain' => array(),
 		));
 	}
+	public function atualizar($pessoa) {
+		if(!empty($pessoa['Pessoa']['nascimento'])) {
+			$this->beforeSaveBrDatetime($pessoa['Pessoa']['nascimento']);
+		}
+		if(!$this->save($pessoa)) {
+			return false;
+		}
+		return true;
+	}
 	public function atualizarPessoaEUsuario($pessoa) {
 		$this->validate = array();
 		if(empty($pessoa['Pessoa']['foto'])) {

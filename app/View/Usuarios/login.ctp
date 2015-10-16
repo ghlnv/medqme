@@ -14,17 +14,34 @@ echo $this->Form->create('Usuario', array(
 
 echo $this->Form->input('login', array(
 	'label' => 'Login',
-	'style' => 'width: 98%;',
+	'class' => 'form-control',
 ));
 echo $this->Form->input('senha', array(
 	'label' => 'Senha', 
+	'class' => 'form-control',
 	'type' => 'password',
-	'style' => 'width: 98%;',
 ));
 
 echo $this->Form->submit('Entrar', array(
-	'div' => array('style' => 'clear: none; text-align: right'),
+	'div' => array(
+		'class' => 'input',
+		'style' => 'clear: none; text-align: right'
+	),
+	'class' => 'btn btn-primary',
 ));
 
 echo $this->Form->end();
+
+echo $this->Html->tag('br');
+echo $this->Html->tag('br');
+echo $this->Html->link("Não possui login? Registre-se &#10097;",
+	[
+		'controller' => 'pessoas',
+		'action' => 'registrar',
+	],
+	[
+		'class' => 'btn btn-primary btn-lg btn-block',
+		'escape' => false,
+	]
+);
 echo $this->Html->tag('/div');

@@ -279,7 +279,7 @@ class Usuario extends AppModel {
 	// #########################################################################
 	// Métodos privados ########################################################
 	private function enviarEmailSobreUsuarioCadastrado(&$usuario) {
-		$email = new CakeEmail('smtp');
+		$email = new CakeEmail('default');
 		$email->template('usuario_cadastro');
 		$email->viewVars(array(
 			'usuario' => $usuario,
@@ -298,7 +298,7 @@ class Usuario extends AppModel {
 			'usuario' => $usuario,
 		));
 		$email->to($admin['Pessoa']['email']);
-		$email->subject('Novo cadastro efetuado no Cozinha Legal!');
+		$email->subject('Novo cadastro efetuado no MedQMe!');
 		$email->send();
 	}
 	private function gerarTokenParaTrocarSenha(&$usuario) {
@@ -311,7 +311,7 @@ class Usuario extends AppModel {
 	private function enviarEmailSobreLinkParaTrocarSenha(&$usuario) {
 		$token = $this->gerarTokenParaTrocarSenha($usuario);
 		
-		$this->Email = new CakeEmail('smtp');
+		$this->Email = new CakeEmail('default');
 		$this->Email->template('usuario_requerimento_senha');
 		$this->Email->viewVars(compact('usuario', 'token'));
 		$this->Email->subject('Nova senha para login no Clinimap requerida com sucesso!');
@@ -320,7 +320,7 @@ class Usuario extends AppModel {
 		$this->Email->send();
 	}
 	private function enviarEmailSobreNovaSenhaGerada(&$usuario) {
-		$this->Email = new CakeEmail('smtp');
+		$this->Email = new CakeEmail('default');
 		$this->Email->template('usuario_nova_senha');
 		$this->Email->viewVars(compact('usuario'));
 		$this->Email->subject('Nova senha para login no Clinimap cadastrada com sucesso!');
