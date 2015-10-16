@@ -139,7 +139,7 @@ class MedicamentosHelper extends AppHelper {
 			'id' => $medicamentoNomeId,
 		));
 		$ret.= $this->Html->tag('div', 'Em reais (R$) :', array(
-			'style' => '',
+			'style' => 'width: 100%;',
 		));
 		$ret.= $this->Form->input('Medicamento.pf_0', array(
 			'div' => array('style' => 'width: 33%; vertical-align: bottom;'),

@@ -17,13 +17,7 @@ class Pessoa extends AppModel {
 				'message' => 'Nome não pode ficar vazio',
 			),
 		),
-		'telefone' => array(
-			'notEmpty' => array(
-				'rule' => 'notempty',
-				'message' => 'Campo obrigatório',
-			),
-		),
-		'nascimento' => array(
+		'email' => array(
 			'notEmpty' => array(
 				'rule' => 'notempty',
 				'message' => 'Campo obrigatório',

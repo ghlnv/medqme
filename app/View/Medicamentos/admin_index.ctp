@@ -13,7 +13,7 @@ function medicamentos(&$view, &$medicamentos) {
 	$ret.= linkParaCadastrarMedicamento($view);
 	$ret.= linkParaImportar($view);
 	$ret.= $view->Html->tag('/h1');
-	$ret.= $view->Html->tag('div', '', array('class' => 'line'));
+	$ret.= $view->Html->tag('hr', '', ['style' => 'margin-bottom: 10px;']);
 	$ret.= busca($view);
 
 	$ret.= $view->Html->tag('table');
