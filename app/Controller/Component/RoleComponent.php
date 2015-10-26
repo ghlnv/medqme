@@ -4,45 +4,62 @@ class RoleComponent extends Object {
 	var $components = array();
 	var $controller;
 	
-	function __construct(ComponentCollection $collection, $settings = array()) {
-        parent::__construct($collection, $settings);
+	public function __construct() {
+        parent::__construct();
     }
-	function beforeRedirect() {
-		
-	}
-	function initialize(&$controller) {
+	public function beforeRedirect() {}
+	public function initialize(&$controller) {
 		$this->controller = $controller;
 		$this->controller->set('role', $this);
 	}
-	function startup(&$controller) {}
-	function beforeRender(&$controller) {}
-	function shutdown(&$controller) {}
+	public function startup(&$controller) {}
+	public function beforeRender(&$controller) {}
+	public function shutdown(&$controller) {}
 	
    // ###############################################################
    // Verificações específicas ######################################
 	public function isAdmin() {
-		if(1 == AuthComponent::user('id')) {
-			return true;
+		return 1 == AuthComponent::user('id');
+	}
+	public function isEstudante() {
+		if (SessionComponent::check('Usuario.estudante')) {
+			return SessionComponent::read('Usuario.estudante');
 		}
-		return false;
+		$this->controller->loadModel('Usuario');
+		$permissao = 'Estudante' == $this->controller->Usuario->field('tipo', [
+			'conditions' => ['id' => AuthComponent::user('id')],
+			'contain' => false,
+		]);
+		SessionComponent::write('Usuario.estudante', $permissao);
+		return $permissao;
+	}
+	public function isSaude() {
+		if (SessionComponent::check('Usuario.saude')) {
+			return SessionComponent::read('Usuario.saude');
+		}
+		$this->controller->loadModel('Usuario');
+		$permissao = 'Profissional de Saúde' == $this->controller->Usuario->field('tipo', [
+			'conditions' => ['id' => AuthComponent::user('id')],
+			'contain' => false,
+		]);
+		SessionComponent::write('Usuario.saude', $permissao);
+		return $permissao;
 	}
 	public function getPessoa() {
-		if (SessionComponent::check('Usuario.Pessoa')) {
-			return SessionComponent::read('Usuario.Pessoa');
+		if (SessionComponent::check('Pessoa')) {
+			return SessionComponent::read('Pessoa');
 		}
-		$this->controller->loadModel('Pessoa');
-		$pessoa = $this->controller->Pessoa->getRole(AuthComponent::user('pessoa_id'));
+		$pessoa = $this->getPessoaRole();
 		if(!empty($pessoa)) {
-			SessionComponent::write('Usuario.Pessoa', $pessoa);
+			SessionComponent::write('Pessoa', $pessoa);
 			return $pessoa;
 		}
 		return false;
 	}
 	public function updatePessoa() {
-		$this->controller->loadModel('Pessoa');
-		$pessoa = $this->controller->Pessoa->getRole(AuthComponent::user('pessoa_id'));
+		$pessoa = $this->getPessoaRole();
 		if(!empty($pessoa)) {
-			SessionComponent::write('Usuario.Pessoa', $pessoa);
+			SessionComponent::write('Pessoa', $pessoa);
 		}
 	}
 	public function error() {
@@ -51,5 +68,19 @@ class RoleComponent extends Object {
 	}
 	
 	// #########################################################################
-	// Outras verificações #####################################################
+	// Métodos privados ########################################################
+	public function getPessoaRole() {
+		$this->controller->loadModel('Pessoa');
+		return $this->controller->Pessoa->find('first', array(
+			'fields' => array(
+				'Pessoa.id',
+				'Pessoa.nome',
+				'Pessoa.email',
+			),
+			'conditions' => [
+				'Pessoa.id' => AuthComponent::user('pessoa_id'),
+			],
+			'contain' => false,
+		));
+	}
 }

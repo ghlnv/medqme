@@ -134,9 +134,6 @@ table tr td {
 	border-bottom:1px solid #ddd;
 	line-height: 1.8em;
 }
-table tr:nth-child(even) {
-	background: #f9f9f9;
-}
 td.actions {
 	text-align: center;
 	white-space: nowrap;
@@ -324,15 +321,6 @@ input[type=submit] {
 	display: inline;
 	font-size: 110%;
 	width: auto;
-}
-form .submit input[type=submit] {
-	border-color: #2d6324;
-	color: #fff;
-	cursor: pointer;
-	text-shadow: rgba(0, 0, 0, 0.5) 0px -1px 0px;
-	padding: 0.2em 0.4em;
-}
-form .submit input[type=submit]:hover {
 }
 /* Form errors */
 form .error {

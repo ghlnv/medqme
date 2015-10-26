@@ -147,17 +147,6 @@ class Pessoa extends AppModel {
 		$this->create();
 		return $this->saveAll($pessoa, array('validate' => 'first'));
 	}
-	function getRole($pessoaId) {
-		return $this->find('first', array(
-			'fields' => array(
-				'Pessoa.id',
-				'Pessoa.nome',
-				'Pessoa.email',
-			),
-			'conditions' => array('Pessoa.id' => $pessoaId),
-			'contain' => false,
-		));
-	}
 	function buscarAdmin() {
 		return $this->find('first', array(
 			'conditions' => array('Pessoa.id' => 1),

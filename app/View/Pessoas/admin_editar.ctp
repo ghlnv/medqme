@@ -22,7 +22,6 @@ echo $this->Html->tag('hr');
 echo $this->Pessoas->formEditarLoginSenhaAdmin();
 echo $this->Html->tag('/div');
 echo $this->Html->tag('/div');
-echo $this->Pessoas->linkPagina($this->request->data['Pessoa']);
 echo $this->Html->tag('/div');
 
 $this->Js->buffer("loadMask()");

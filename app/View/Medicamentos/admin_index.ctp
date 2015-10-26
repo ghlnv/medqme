@@ -7,7 +7,7 @@ echo $this->Medicamentos->linkParaImportar();
 echo $this->Html->tag('/h1');
 echo $this->Medicamentos->formBuscaPadrao();
 
-echo $this->Html->tag('table');
+echo $this->Html->tag('table', null, ['class' => 'table table-striped table-hover']);
 foreach($medicamentos as $medicamento) {
 	echo $this->Html->tag('tr');
 	echo $this->Html->tag('td');

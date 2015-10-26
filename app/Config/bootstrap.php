@@ -116,6 +116,7 @@ CakeLog::config('error', array(
 CakePlugin::load('DebugKit');
 
 Configure::write('Usuario.tipos', array(
-	'Comum' => 'Pessoa Comum',
-	'Saude' => 'Estudante/Profissional de Saúde',
+	'Pessoa Comum' => 'Pessoa Comum',
+	'Estudante' => 'Estudante',
+	'Profissional de Saúde' => 'Profissional de Saúde',
 ));

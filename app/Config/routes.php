@@ -32,12 +32,24 @@
 	
 	Configure::write('Routing.prefixes', array(
 		'admin',
+		'estudante',
+		'saude',
 	));
 
 	Router::connect("/admin/:controller", array(
 		'action' => 'index',
 		'prefix' => 'admin',
 		'admin' => true,
+	));
+	Router::connect("/estudante/:controller", array(
+		'action' => 'index',
+		'prefix' => 'estudante',
+		'estudante' => true,
+	));
+	Router::connect("/saude/:controller", array(
+		'action' => 'index',
+		'prefix' => 'saude',
+		'saude' => true,
 	));
 
 /**

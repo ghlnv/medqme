@@ -120,6 +120,7 @@ class PessoasHelper extends AppHelper {
 				'class' => 'input submit',
 				'style' => 'clear: both; float: left; margin-top: 0;',
 			),
+			'class' => 'btn btn-primary',
 		));
 		$ret.= $this->Html->tag('div', '', array('class' => 'clear'));
 		$ret.= $this->Form->end();
@@ -273,6 +274,7 @@ class PessoasHelper extends AppHelper {
 				'class' => 'input submit',
 				'style' => 'clear: both;',
 			),
+			'class' => 'btn btn-primary',
 		));
 		$ret.= $this->Form->end();
 		return $ret;

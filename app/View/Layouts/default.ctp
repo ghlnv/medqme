@@ -26,7 +26,6 @@
 		echo $this->Html->meta('icon');
 
 		// Default CSS
-		echo $this->Html->css('cake.generic');
 		echo $this->Html->css('jquery-ui.min');
 		echo $this->Html->css('jquery-ui.structure.min');
 		echo $this->Html->css('jquery-ui.theme.min');
