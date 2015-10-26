@@ -4,6 +4,24 @@ class PessoasHelper extends AppHelper {
 
 	// #########################################################################
 	// Métodos #################################################################
+	public function dadosEstudante($pessoa) {
+		$ret = '';
+		$ret.= $this->Html->tag('b');
+		$ret.= $pessoa['Pessoa']['instituicao'];
+		$ret.= $this->Html->tag('/b');
+		$ret.= ' / ';
+		$ret.= $pessoa['Pessoa']['escolaridade'];
+		$ret.= ' : ';
+		$ret.= $pessoa['Pessoa']['escolaridade_ano'];
+		return $ret;
+	}
+	public function dadosSaude($pessoa) {
+		$ret = '';
+		$ret.= $pessoa['Pessoa']['especialidade'];
+		$ret.= ' : ';
+		$ret.= $pessoa['Pessoa']['cr'];
+		return $ret;
+	}
 	public function formRegistro() {
 		$ret = '';
 		$ret.= $this->Html->tag('div', null, ['class' => 'container']);

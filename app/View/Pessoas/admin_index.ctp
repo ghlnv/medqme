@@ -13,13 +13,26 @@ foreach($pessoas as $pessoa) {
 	echo $this->Html->tag('div', null, [
 		'class' => 'col-md-6',
 	]);
+	echo $this->Html->tag('b');
 	echo $pessoa['Pessoa']['nome'];
+	echo $this->Html->tag('/b');
+	
+	echo $this->Html->tag('div', null, [
+		'class' => 'smallText',
+	]);
+	echo $pessoa['Usuario']['tipo'];
+	echo $this->Html->tag('/div');
 	echo $this->Html->tag('/div');
 	
 	echo $this->Html->tag('div', null, [
 		'class' => 'col-md-4',
 	]);
-	echo $pessoa['Usuario']['tipo'];
+	if('Estudante' == $pessoa['Usuario']['tipo']) {
+		echo $this->Pessoas->dadosEstudante($pessoa);
+	}
+	else if('Profissional de Saúde' == $pessoa['Usuario']['tipo']) {
+		echo $this->Pessoas->dadosSaude($pessoa);
+	}
 	echo $this->Html->tag('/div');
 	
 	echo $this->Html->tag('div', null, [

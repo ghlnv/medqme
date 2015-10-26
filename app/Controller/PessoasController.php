@@ -43,9 +43,13 @@ class PessoasController extends AppController {
 			foreach($tokens as $token) {
 				$this->paginate['Pessoa']['conditions'][]['OR'] = array(
 					'Pessoa.nome LIKE' => "%$token%",
+					'Pessoa.especialidade LIKE' => "%$token%",
+					'Pessoa.escolaridade LIKE' => "%$token%",
+					'Pessoa.instituicao LIKE' => "%$token%",
 					'Pessoa.logradouro LIKE' => "%$token%",
 					'Pessoa.cidade LIKE' => "%$token%",
 					'Pessoa.estado LIKE' => "%$token%",
+					'Usuario.tipo' => "%$token%",
 				);
 			}
 		}
