@@ -285,7 +285,7 @@ class Usuario extends AppModel {
 			'usuario' => $usuario,
 		));
 		$email->to($usuario['Pessoa']['email']);
-		$email->subject('Cadastro no Cozinha Legal efetuado com sucesso!');
+		$email->subject('Cadastro efetuado com sucesso!');
 		$email->send();
 	}
 	private function reportarAdminSobreUsuarioCadastrado(&$usuario) {

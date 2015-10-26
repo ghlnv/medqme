@@ -262,6 +262,13 @@ div.input {
 div.input.auto {
 	width: auto;
 }
+.inline input {
+	display: inline-block;
+}
+.inline label {
+	display: inline-block;
+	margin-right: 20px;
+}
 div.submit {
 	border: 0;
 	clear: both;
