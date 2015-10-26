@@ -37,7 +37,9 @@ class PessoasHelper extends AppHelper {
 		$ret.= $this->Form->hidden('Pessoa.id');
 		$ret.= $this->Form->hidden('Usuario.id');
 		$ret.= $this->Form->input('Usuario.tipo', array(
-			'div' => array('class' => 'input radio required inline'),
+			'div' => array(
+				'class' => 'input radio required inline bg-success',
+			),
 			'type' => 'radio',
 			'legend' => false,
 			'options' => Configure::read('Usuario.tipos'),
