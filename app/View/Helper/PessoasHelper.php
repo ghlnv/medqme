@@ -137,32 +137,25 @@ class PessoasHelper extends AppHelper {
 		));
 		$ret.= $this->Form->input('id');
 		$ret.= $this->Form->input('Usuario.login', array(
-			'div' => [
-				'class' => 'input text form-group',
-			],
 			'label' => 'Login',
 			'class' => 'form-control',
 			'readonly' => true,
 		));
 		$ret.= $this->Form->input('nova_senha', array(
-			'div' => [
-				'class' => 'input text form-group',
-			],
 			'label'=> 'Nova Senha',
 			'type' => 'password',
 			'size' => 20,
 			'class' => 'form-control empty',
 		));
 		$ret.= $this->Form->input('confirm', array(
-			'div' => [
-				'class' => 'input text form-group',
-			],
 			'label'=> 'Confirme a nova senha',
 			'type' => 'password',
 			'size' => 20,
 			'class' => 'form-control empty',
 		));
-		$ret.= $this->Form->submit('Salvar');
+		$ret.= $this->Form->submit('Salvar', [
+			'class' => 'btn btn-primary',
+		]);
 		$ret.= $this->Form->end();
 		return $ret;
 	}
@@ -177,6 +170,170 @@ class PessoasHelper extends AppHelper {
 		));
 
 		$ret.= $this->Form->input('Pessoa.id');
+		$ret.= $this->formInputsNomeEmail();
+		$ret.= $this->Html->tag('br');
+		$ret.= $this->formInputsTelefones();
+		$ret.= $this->Form->input('Pessoa.nascimento', array(
+			'div' => [
+				'class' => 'input auto',
+				'style' => 'display: inline-block; margin-right: 0.5em;'
+			],
+			'type' => 'text',
+			'class' => 'form-control birth date',
+			'value' => $this->Gerar->brDate($this->request->data['Pessoa']['nascimento'], 'd-m-Y'),
+		));
+		$ret.= $this->Html->tag('br');
+		$ret.= $this->formInputsEndereco();
+		$ret.= $this->Html->tag('br');
+		$ret.= $this->Form->submit('Salvar', array(
+			'div' => array(
+				'class' => 'input submit',
+				'style' => 'clear: both;',
+			),
+			'class' => 'btn btn-primary',
+		));
+		$ret.= $this->Form->end();
+		return $ret;
+	}
+	public function formPerfilEstudante() {
+		$ret = '';
+		$ret.= $this->Form->create('Pessoa', array(
+			'url' => array(
+				'controller' => 'pessoas',
+			),
+			'class' => 'centralizarComTamanhoMaximo',
+			'style' => 'max-width: 800px; padding: 0 2em;',
+		));
+
+		$ret.= $this->Form->input('Pessoa.id');
+		$ret.= $this->formInputsNomeEmail();
+
+		$ret.= $this->Html->tag('h4', 'Ensino superior', ['style' => 'margin: 20px 5px 10px;']);
+		$ret.= $this->Form->input('Pessoa.escolaridade', array(
+			'div' => [
+				'class' => 'input auto',
+				'style' => 'display: inline-block; margin-right: 0.5em;'
+			],
+			'class' => 'form-control',
+			'label' => 'Escolaridade',
+			'options' => Configure::read('Estudante.escolaridades'),
+		));
+		$ret.= $this->Form->input('Pessoa.escolaridade_ano', array(
+			'div' => [
+				'class' => 'input auto',
+				'style' => 'display: inline-block; margin-right: 0.5em;'
+			],
+			'class' => 'form-control',
+			'label' => 'Ano ingresso',
+			'style' => 'width: 80px; text-align: center;',
+		));
+		$ret.= $this->Html->tag('br');
+		$ret.= $this->Form->input('Pessoa.instituicao', array(
+			'div' => [
+				'class' => 'input auto',
+				'style' => 'display: inline-block; margin-right: 0.5em;'
+			],
+			'class' => 'form-control',
+			'label' => 'Instituição de ensino',
+		));
+		$ret.= $this->Form->input('Pessoa.instituicao_cidade', array(
+			'div' => [
+				'class' => 'input auto',
+				'style' => 'display: inline-block; margin-right: 0.5em;'
+			],
+			'class' => 'form-control',
+			'label' => 'Cidade',
+		));
+		$ret.= $this->Form->input('Pessoa.instituicao_estado', array(
+			'div' => [
+				'class' => 'input auto',
+				'style' => 'display: inline-block; margin-right: 0.5em;'
+			],
+			'class' => 'form-control',
+			'label' => 'Estado',
+			'style' => 'width: 80px; text-align: center;',
+		));
+		$ret.= $this->Html->tag('h4', 'Dados pessoais', ['style' => 'margin: 20px 5px 10px;']);
+		$ret.= $this->formInputsTelefones();
+		$ret.= $this->Form->input('Pessoa.nascimento', array(
+			'div' => [
+				'class' => 'input auto',
+				'style' => 'display: inline-block; margin-right: 0.5em;'
+			],
+			'type' => 'text',
+			'class' => 'form-control birth date',
+			'value' => $this->Gerar->brDate($this->request->data['Pessoa']['nascimento'], 'd-m-Y'),
+		));
+		$ret.= $this->Html->tag('br');
+		$ret.= $this->formInputsEndereco();
+		$ret.= $this->Html->tag('br');
+		$ret.= $this->Form->submit('Salvar', array(
+			'div' => array(
+				'class' => 'input submit',
+				'style' => 'clear: both;',
+			),
+			'class' => 'btn btn-primary',
+		));
+		$ret.= $this->Form->end();
+		return $ret;
+	}
+	public function formPerfilSaude() {
+		$ret = '';
+		$ret.= $this->Form->create('Pessoa', array(
+			'url' => array(
+				'controller' => 'pessoas',
+			),
+			'class' => 'centralizarComTamanhoMaximo',
+			'style' => 'max-width: 800px; padding: 0 2em;',
+		));
+
+		$ret.= $this->Form->input('Pessoa.id');
+		$ret.= $this->formInputsNomeEmail();
+
+		$ret.= $this->Html->tag('h4', 'Profissional de saúde', ['style' => 'margin: 20px 5px 10px;']);
+		$ret.= $this->Form->input('Pessoa.especialidade', array(
+			'div' => [
+				'class' => 'input auto',
+				'style' => 'display: inline-block; margin-right: 0.5em;'
+			],
+			'class' => 'form-control',
+			'label' => 'Especialidade',
+		));
+		$ret.= $this->Form->input('Pessoa.cr', array(
+			'div' => [
+				'class' => 'input auto',
+				'style' => 'display: inline-block; margin-right: 0.5em;'
+			],
+			'class' => 'form-control',
+			'label' => 'CRM',
+			'style' => 'width: 150px; text-align: center;',
+		));
+		$ret.= $this->Html->tag('h4', 'Dados pessoais', ['style' => 'margin: 20px 5px 10px;']);
+		$ret.= $this->formInputsTelefones();
+		$ret.= $this->Form->input('Pessoa.nascimento', array(
+			'div' => [
+				'class' => 'input auto',
+				'style' => 'display: inline-block; margin-right: 0.5em;'
+			],
+			'type' => 'text',
+			'class' => 'form-control birth date',
+			'value' => $this->Gerar->brDate($this->request->data['Pessoa']['nascimento'], 'd-m-Y'),
+		));
+		$ret.= $this->Html->tag('br');
+		$ret.= $this->formInputsEndereco();
+		$ret.= $this->Html->tag('br');
+		$ret.= $this->Form->submit('Salvar', array(
+			'div' => array(
+				'class' => 'input submit',
+				'style' => 'clear: both;',
+			),
+			'class' => 'btn btn-primary',
+		));
+		$ret.= $this->Form->end();
+		return $ret;
+	}
+	public function formInputsNomeEmail() {
+		$ret = '';
 		$ret.= $this->Form->input('Pessoa.nome', array(
 			'div' => ['class' => 'input required auto'],
 			'class' => 'form-control',
@@ -190,7 +347,10 @@ class PessoasHelper extends AppHelper {
 			'class' => 'form-control',
 			'style' => 'width: 300px;'
 		));
-		$ret.= $this->Html->tag('br');
+		return $ret;
+	}
+	public function formInputsTelefones() {
+		$ret = '';
 		$ret.= $this->Form->input('Pessoa.telefone', array(
 			'div' => [
 				'class' => 'input auto',
@@ -207,17 +367,10 @@ class PessoasHelper extends AppHelper {
 			'class' => 'form-control phone',
 			'style' => 'text-align: center;',
 		));
-		$ret.= $this->Form->input('Pessoa.nascimento', array(
-			'div' => [
-				'class' => 'input auto',
-				'style' => 'display: inline-block; margin-right: 0.5em;'
-			],
-			'type' => 'text',
-			'class' => 'form-control birth date',
-			'value' => $this->Gerar->brDate($this->request->data['Pessoa']['nascimento'], 'd-m-Y'),
-		));
-		$ret.= $this->Html->tag('br');
-
+		return $ret;
+	}
+	public function formInputsEndereco() {
+		$ret = '';
 		$ret.= $this->Form->input('Pessoa.logradouro', array(
 			'div' => [
 				'class' => 'input auto',
@@ -268,17 +421,9 @@ class PessoasHelper extends AppHelper {
 			'class' => 'form-control',
 			'style' => 'width: 4em; text-align: center;'
 		));
-		$ret.= $this->Html->tag('br');
-		$ret.= $this->Form->submit('Salvar', array(
-			'div' => array(
-				'class' => 'input submit',
-				'style' => 'clear: both;',
-			),
-			'class' => 'btn btn-primary',
-		));
-		$ret.= $this->Form->end();
 		return $ret;
 	}
+
 	public function formBuscaPadrao() {
 		$ret = '';
 		$ret.= $this->Form->create('Filtro', array(

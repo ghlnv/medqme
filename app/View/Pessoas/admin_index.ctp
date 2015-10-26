@@ -10,8 +10,16 @@ foreach($pessoas as $pessoa) {
 	echo $this->Html->tag('tr');
 	echo $this->Html->tag('td');
 	echo $this->Html->tag('div', null, ['class' => 'row']);
-	echo $this->Html->tag('div', null, ['class' => 'col-md-10']);
+	echo $this->Html->tag('div', null, [
+		'class' => 'col-md-6',
+	]);
 	echo $pessoa['Pessoa']['nome'];
+	echo $this->Html->tag('/div');
+	
+	echo $this->Html->tag('div', null, [
+		'class' => 'col-md-4',
+	]);
+	echo $pessoa['Usuario']['tipo'];
 	echo $this->Html->tag('/div');
 	
 	echo $this->Html->tag('div', null, [

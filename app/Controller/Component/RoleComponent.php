@@ -27,8 +27,7 @@ class RoleComponent extends Object {
 		}
 		$this->controller->loadModel('Usuario');
 		$permissao = 'Estudante' == $this->controller->Usuario->field('tipo', [
-			'conditions' => ['id' => AuthComponent::user('id')],
-			'contain' => false,
+			['id' => AuthComponent::user('id')],
 		]);
 		SessionComponent::write('Usuario.estudante', $permissao);
 		return $permissao;
@@ -39,8 +38,7 @@ class RoleComponent extends Object {
 		}
 		$this->controller->loadModel('Usuario');
 		$permissao = 'Profissional de Saúde' == $this->controller->Usuario->field('tipo', [
-			'conditions' => ['id' => AuthComponent::user('id')],
-			'contain' => false,
+			['id' => AuthComponent::user('id')],
 		]);
 		SessionComponent::write('Usuario.saude', $permissao);
 		return $permissao;

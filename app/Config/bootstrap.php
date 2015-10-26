@@ -120,3 +120,7 @@ Configure::write('Usuario.tipos', array(
 	'Estudante' => 'Estudante',
 	'Profissional de Saúde' => 'Profissional de Saúde',
 ));
+Configure::write('Estudante.escolaridades', array(
+	'Graduando' => 'Graduando',
+	'Residente' => 'Residente',
+));

@@ -9,7 +9,15 @@ echo $this->Html->tag('/h1');
 
 echo $this->Html->tag('hr');
 
-echo $this->Pessoas->formPerfil();
+if('Estudante' == $this->request->data['Usuario']['tipo']) {
+	echo $this->Pessoas->formPerfilEstudante();
+}
+else if('Profissional de Saúde' == $this->request->data['Usuario']['tipo']) {
+	echo $this->Pessoas->formPerfilSaude();
+}
+else {
+	echo $this->Pessoas->formPerfil();
+}
 echo $this->Html->tag('/div');
 
 echo $this->Html->tag('div', null, ['class' => 'col-md-4']);

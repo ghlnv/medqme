@@ -6,7 +6,16 @@ echo $this->Html->tag('/h1');
 
 echo $this->Html->tag('hr');
 
-echo $this->Pessoas->formPerfil();
+if($role->isEstudante()) {
+	echo $this->Pessoas->formPerfilEstudante();
+}
+else if($role->isSaude()) {
+	echo $this->Pessoas->formPerfilSaude();
+}
+else {
+	echo $this->Pessoas->formPerfil();
+}
+
 echo $this->Html->tag('br');
 echo $this->Html->tag('br');
 

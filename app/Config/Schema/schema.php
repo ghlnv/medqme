@@ -268,17 +268,47 @@ class AppSchema extends CakeSchema {
 			'null' => true, 
 			'default' => NULL
 		),
+		'escolaridade' => array(
+			'type' => 'string',
+			'null' => true,
+			'default' => NULL,
+			'length' => 128,
+		),
+		'escolaridade_ano' => array(
+			'type' => 'string',
+			'null' => true,
+			'default' => NULL,
+			'length' => 4,
+		),
+		'instituicao' => array(
+			'type' => 'string',
+			'null' => true,
+			'default' => NULL,
+			'length' => 128,
+		),
+		'instituicao_cidade' => array(
+			'type' => 'string',
+			'null' => true,
+			'default' => NULL,
+			'length' => 128,
+		),
+		'instituicao_estado' => array(
+			'type' => 'string',
+			'null' => true,
+			'default' => NULL,
+			'length' => 8,
+		),
 		'estado_civil' => array(
 			'type' => 'string',
 			'null' => true,
 			'default' => NULL,
 			'length' => 64
 		),
-		'profissao' => array(
+		'especialidade' => array(
 			'type' => 'string',
 			'null' => true,
 			'default' => NULL,
-			'length' => 64
+			'length' => 128,
 		),
 		'rg' => array(
 			'type' => 'string',
@@ -303,11 +333,6 @@ class AppSchema extends CakeSchema {
 			'null' => true,
 			'default' => NULL,
 			'length' => 64
-		),
-		'assinatura' => array(
-			'type' => 'text',
-			'null' => true,
-			'default' => NULL,
 		),
 		'telefone' => array(
 			'type' => 'string',
@@ -405,7 +430,11 @@ class AppSchema extends CakeSchema {
 			'PRIMARY' => array(
 				'column' => 'id',
 				'unique' => 1
-			)
+			),
+			'index_nome' => array(
+				'column' => 'nome',
+				'unique' => 0,
+			),
 		),
 		'tableParameters' => array(
 			'charset' => 'utf8',

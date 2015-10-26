@@ -44,7 +44,7 @@ h3 {
 	color: #003d4c;
 }
 h4 {
-	color: #993;
+	color: #2c6877;
 }
 p {
 	margin: 0 0 1em 0;
@@ -262,6 +262,11 @@ div.input {
 div.input.auto {
 	width: auto;
 }
+div.submit {
+	border: 0;
+	clear: both;
+	padding: .5em;
+}
 form .input {
 	color: #444;
 }
@@ -272,10 +277,6 @@ form .required label:after {
 	color: #e32;
 	content: '*';
 	display:inline;
-}
-form div.submit {
-	border: 0;
-	clear: both;
 }
 label {
 	display: block;
