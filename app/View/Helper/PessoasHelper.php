@@ -505,22 +505,6 @@ class PessoasHelper extends AppHelper {
 			)
 		);
 	}
-	public function linkCurriculo(&$pessoa) {
-		return $this->Html->link($this->Html->image('icons/cv-32.png'),
-			array(
-				'admin' => false,
-				'controller' => 'pessoas',
-				'action' => 'curriculo',
-				$pessoa['id'],
-				Inflector::slug($pessoa['nome'], '-'),
-			),
-			array(
-				'title' => 'Ver perfil da pessoa',
-				'style' => 'margin: 0 0.5em;',
-				'escape' => false
-			)
-		);
-	}
 	public function linkVoltarParaPessoas() {
 		return $this->Html->link("&#10096;",
 			array(
