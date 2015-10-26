@@ -22,34 +22,34 @@ class RoleComponent extends Object {
 		return 1 == AuthComponent::user('id');
 	}
 	public function isEstudante() {
-		if (SessionComponent::check('Usuario.estudante')) {
-			return SessionComponent::read('Usuario.estudante');
+		if ($this->controller->Session->check('Usuario.estudante')) {
+			return $this->controller->Session->read('Usuario.estudante');
 		}
 		$this->controller->loadModel('Usuario');
 		$permissao = 'Estudante' == $this->controller->Usuario->field('tipo', [
 			['id' => AuthComponent::user('id')],
 		]);
-		SessionComponent::write('Usuario.estudante', $permissao);
+		$this->controller->Session->write('Usuario.estudante', $permissao);
 		return $permissao;
 	}
 	public function isSaude() {
-		if (SessionComponent::check('Usuario.saude')) {
-			return SessionComponent::read('Usuario.saude');
+		if ($this->controller->Session->check('Usuario.saude')) {
+			return $this->controller->Session->read('Usuario.saude');
 		}
 		$this->controller->loadModel('Usuario');
 		$permissao = 'Profissional de Saúde' == $this->controller->Usuario->field('tipo', [
 			['id' => AuthComponent::user('id')],
 		]);
-		SessionComponent::write('Usuario.saude', $permissao);
+		$this->controller->Session->write('Usuario.saude', $permissao);
 		return $permissao;
 	}
 	public function getPessoa() {
-		if (SessionComponent::check('Pessoa')) {
-			return SessionComponent::read('Pessoa');
+		if ($this->controller->Session->check('Pessoa')) {
+			return $this->controller->Session->read('Pessoa');
 		}
 		$pessoa = $this->getPessoaRole();
 		if(!empty($pessoa)) {
-			SessionComponent::write('Pessoa', $pessoa);
+			$this->controller->Session->write('Pessoa', $pessoa);
 			return $pessoa;
 		}
 		return false;
@@ -57,7 +57,7 @@ class RoleComponent extends Object {
 	public function updatePessoa() {
 		$pessoa = $this->getPessoaRole();
 		if(!empty($pessoa)) {
-			SessionComponent::write('Pessoa', $pessoa);
+			$this->controller->Session->write('Pessoa', $pessoa);
 		}
 	}
 	public function error() {
