@@ -14,11 +14,11 @@ foreach($medicamentos as $medicamento) {
 	echo $this->Html->tag('div', null, ['class' => 'row']);
 	echo $this->Html->tag('div', null, ['class' => 'col-md-10']);
 	echo $this->Html->tag('b');
-	if($medicamento['Medicamento']['codigo']) {
-		echo $medicamento['Medicamento']['codigo'];
-		echo ' - ';
-	}
 	echo $medicamento['Medicamento']['nome'];
+	if($medicamento['Medicamento']['codigo']) {
+		echo ' - ';
+		echo $medicamento['Medicamento']['codigo'];
+	}
 	echo ' [';
 	echo $medicamento['Medicamento']['codigo_ggrem'];
 	echo ']';
@@ -33,12 +33,50 @@ foreach($medicamentos as $medicamento) {
 		echo $this->Html->tag('/div');
 	}
 
-	if($medicamento['Medicamento']['laboratorio']) {
+	if($medicamento['Medicamento']['formas_farmaceuticas_solidas']) {
 		echo $this->Html->tag('div', null, array('class' => 'smallText'));
 		echo $this->Html->tag('b');
-		echo 'Laboratório: ';
+		echo 'Forma farmacêutica sólida: ';
 		echo $this->Html->tag('/b');
-		echo $medicamento['Medicamento']['laboratorio'];
+		echo $medicamento['Medicamento']['formas_farmaceuticas_solidas'];
+		echo $this->Html->tag('/div');
+	}
+
+	if($medicamento['Medicamento']['formas_farmaceuticas_liquidas']) {
+		echo $this->Html->tag('div', null, array('class' => 'smallText'));
+		echo $this->Html->tag('b');
+		echo 'Forma farmacêutica líquida: ';
+		echo $this->Html->tag('/b');
+		echo $medicamento['Medicamento']['formas_farmaceuticas_liquidas'];
+		echo $this->Html->tag('/div');
+	}
+
+	if($medicamento['Medicamento']['formas_farmaceuticas_semisolidas']) {
+		echo $this->Html->tag('div', null, array('class' => 'smallText'));
+		echo $this->Html->tag('b');
+		echo 'Forma farmacêutica semi-sólida: ';
+		echo $this->Html->tag('/b');
+		echo $medicamento['Medicamento']['formas_farmaceuticas_semisolidas'];
+		echo $this->Html->tag('/div');
+	}
+
+	if($medicamento['Medicamento']['formas_farmaceuticas_gasosas']) {
+		echo $this->Html->tag('div', null, array('class' => 'smallText'));
+		echo $this->Html->tag('b');
+		echo 'Forma farmacêutica gasosa: ';
+		echo $this->Html->tag('/b');
+		echo $medicamento['Medicamento']['formas_farmaceuticas_gasosas'];
+		echo $this->Html->tag('/div');
+	}
+
+	if($medicamento['Medicamento']['dosagem']) {
+		echo $this->Html->tag('div', null, array('class' => 'smallText'));
+		echo $this->Html->tag('b');
+		echo 'Dosagem: ';
+		echo $this->Html->tag('/b');
+		echo $medicamento['Medicamento']['dosagem'];
+		echo ' ';
+		echo $medicamento['Medicamento']['unidade'];
 		echo $this->Html->tag('/div');
 	}
 
@@ -61,6 +99,18 @@ foreach($medicamentos as $medicamento) {
 	}
 	echo $this->Html->tag('/div');
 
+	echo $this->Html->tag('div', null, array(
+		'class' => 'col-md-2',
+		'style' => 'margin-bottom: 10px; text-align: right;'
+	));
+	echo 'PMC 0: ';
+	echo $this->Html->tag('span', null, [
+		'style' => 'font-weight: bolder;'
+	]);
+	echo $this->Gerar->moedaReal($medicamento['Medicamento']['pmc_0']);
+	echo $this->Html->tag('/span');
+	echo $this->Html->tag('/div');
+	
 	echo $this->Html->tag('div', null, array(
 		'class' => 'col-md-2',
 		'style' => 'text-align: right;'

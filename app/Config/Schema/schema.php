@@ -64,6 +64,16 @@ class AppSchema extends CakeSchema {
 			'null' => true,
 			'default' => NULL
 		),
+		'dosagem' => array(
+			'type' => 'string',
+			'null' => true,
+			'default' => NULL
+		),
+		'unidade' => array(
+			'type' => 'string',
+			'null' => true,
+			'default' => NULL
+		),
 		'pf_0' => array(
 			'type' => 'float',
 			'null' => true,

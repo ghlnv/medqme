@@ -3,8 +3,8 @@ class Medicamento extends AppModel {
 
 	public $displayField = 'nome';
 	public $order = array(
-		'Medicamento.codigo' => 'ASC',
 		'Medicamento.nome' => 'ASC',
+		'Medicamento.codigo' => 'ASC',
 	);
 
 	public $validate = array(
@@ -91,6 +91,8 @@ class Medicamento extends AppModel {
 				'embalagens_primarias' => $this->parserItem($medicamento, 32),
 				'embalagens_secundarias' => $this->parserItem($medicamento, 33),
 				'acessorios' => $this->parserItem($medicamento, 34),
+				'dosagem' => $this->parserItem($medicamento, 35),
+				'unidade' => $this->parserItem($medicamento, 36),
 			);
 			if(!$this->save($medicamento)) {
 				$this->log(debug($medicamento));

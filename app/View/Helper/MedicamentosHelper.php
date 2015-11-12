@@ -83,6 +83,13 @@ class MedicamentosHelper extends AppHelper {
 		);
 	}
 	public function formBuscaPadrao() {
+		$inputId = String::uuid();
+		$urlAutocomplete = $this->Html->url(array(
+			'controller' => 'medicamentos',
+			'action' => 'autocompleteNome',
+		), true);
+		$this->Js->buffer("loadAutoComplete('#$inputId', '$urlAutocomplete');");
+		
 		$ret = '';
 		$ret.= $this->Form->create('Filtro', array(
 			'url' => [
@@ -96,6 +103,7 @@ class MedicamentosHelper extends AppHelper {
 				'class' => 'form-group col-md-4',
 				'style' => 'display: inline-block; float: none; padding: 0 5px 0 0; min-width: 200px;',
 			],
+			'id' => $inputId,
 			'label' => false,
 			'placeholder' => 'Palavras-chaves...',
 			'title' => 'Palavras-chaves...',
@@ -168,6 +176,14 @@ class MedicamentosHelper extends AppHelper {
 		$ret.= $this->Form->input('Medicamento.ean', array(
 			'div' => array('style' => 'width: 50%;'),
 			'label' => 'EAN',
+		));
+		$ret.= $this->Form->input('Medicamento.dosagem', array(
+			'div' => array('style' => 'width: 60%;'),
+			'label' => 'Dosagem',
+		));
+		$ret.= $this->Form->input('Medicamento.unidade', array(
+			'div' => array('style' => 'width: 40%;'),
+			'label' => 'Un.',
 		));
 		$ret.= $this->Form->input('Medicamento.apresentacao', array(
 			'rows' => 3,
