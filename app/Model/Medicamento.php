@@ -9,14 +9,14 @@ class Medicamento extends AppModel {
 
 	public $validate = array(
 		'nome' => array(
-			'notEmpty' => array(
-				'rule' => 'notempty',
+			'notBlank' => array(
+				'rule' => 'notBlank',
 				'message' => 'Campo obrigatório',
 			),
 		),
 		'principio_ativo' => array(
-			'notEmpty' => array(
-				'rule' => 'notempty',
+			'notBlank' => array(
+				'rule' => 'notBlank',
 				'message' => 'Campo obrigatório',
 			),
 		),
