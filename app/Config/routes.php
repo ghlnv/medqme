@@ -25,10 +25,8 @@
  * to use (in this case, /app/View/Pages/home.ctp)...
  */
 	Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
-/**
- * ...and connect the rest of 'Pages' controller's URLs.
- */
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
+	Router::connect('/definirNovaSenha/*', array('controller' => 'usuarios', 'action' => 'definirNovaSenha'));
 	
 	Configure::write('Routing.prefixes', array(
 		'admin',

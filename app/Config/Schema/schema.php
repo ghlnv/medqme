@@ -483,6 +483,11 @@ class AppSchema extends CakeSchema {
 			'default' => NULL,
 			'length' => 64
 		),
+		'requerimento_senha' => array(
+			'type' => 'datetime',
+			'null' => true,
+			'default' => NULL,
+		),
 		'created' => array(
 			'type' => 'datetime',
 			'null' => true,

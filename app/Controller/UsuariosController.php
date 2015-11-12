@@ -31,7 +31,7 @@ class UsuariosController extends AppController {
 				$usuario = $this->Usuario->cadastrar($this->request->data);
 				if($usuario) {
 					$this->Auth->login($usuario['Usuario']);
-					$this->Session->setFlash("Seu cadastrado foi realizado com sucesso! Sua senha inicial foi enviada para seu e-mail. Boas receitas!", 'flash/success');
+					$this->Session->setFlash("Seu cadastrado foi realizado com sucesso! Sua senha inicial foi enviada para seu e-mail. Um ótimo dia!", 'flash/success');
 				}
 				else {
 					$this->Session->setFlash(__('Seu email não pode ser cadastrado, por favor tente novamente...', true));
@@ -45,7 +45,6 @@ class UsuariosController extends AppController {
 		if($this->request->is('post')) {
 			if ($this->Auth->login()) {
 				$this->loadModel('UsuariosLog');
-//				$this->UsuariosLog->insert('Login');
 				return $this->redirect($this->Auth->redirect());
 			}
 			else {
@@ -55,11 +54,8 @@ class UsuariosController extends AppController {
 		if(AuthComponent::user('id')) {
 			$this->redirect($this->Auth->redirect());
 		}
-//		$this->layout = 'login';
 	}
 	public function sair() {
-//		$this->loadModel('UsuariosLog');
-//		$this->UsuariosLog->insert('Logout');
 		$this->Session->destroy();
 		$this->Session->setFlash('Obrigado por usar nossos sistemas!', 'flash/success');
 		$this->redirect($this->Auth->logout());
@@ -68,19 +64,13 @@ class UsuariosController extends AppController {
 		$this->verificarUsuarioDeslogado();
 		
 		if(!empty($this->request->data)) {
-			if(!$this->Captcha->check($this->request->data['Usuario']['captcha'])) {
-				$this->Session->setFlash(__('Você precisa digitar as seis letras corretamente.', true));
+			if($this->Usuario->requererNovaSenha($this->request->data)) {
+				$this->Session->setFlash("Sua nova senha foi requerida com sucesso! Verifique seu e-mail para cadastrar sua nova senha...", 'flash/success');
+				$this->windowReload();
 			}
 			else {
-				if($this->Usuario->requererNovaSenha($this->request->data)) {
-					$this->Session->setFlash("Sua nova senha foi requerida com sucesso! Verifique seu e-mail para cadastrar sua nova senha...", 'flash/success');
-					$this->windowReload();
-				}
-				else {
-					$this->Session->setFlash(__('Sua nova senha não pode ser requerida, por favor confira seu login e tente novamente...', true));
-				}
+				$this->Session->setFlash(__('Sua nova senha não pode ser requerida, por favor aguarde alguns minutos e tente novamente...', true));
 			}
-			$this->request->data['Usuario']['captcha'] = null;
 		}
 	}
 	public function definirNovaSenha($usuarioId, $token) {
@@ -91,14 +81,13 @@ class UsuariosController extends AppController {
 			if($usuario) {
 				$this->Session->setFlash("Sua nova senha foi gerada com sucesso!", 'flash/success');
 				$this->Auth->login($usuario['Usuario']);
-				$this->redirect('/painel');
+				$this->redirect('/');
 			}
 			else {
 				$this->Session->setFlash(__('Sua nova senha não pode ser gerada, por favor confira seus dados e tente novamente...', true));
 			}
 		}
 		$this->request->data = $this->Usuario->buscarParaDefinirNovaSenha($usuarioId, $token);
-		
 		if(!$this->request->data) {
 			$this->redirect('/');
 		}
@@ -108,41 +97,6 @@ class UsuariosController extends AppController {
 		exit;
 	}	
 
-	// #########################################################################
-	// Ações de saúde ##########################################################
-	public function saude_login() {
-		$this->login();
-		$this->render('login');
-	}
-
-	// #########################################################################
-	// Ações de saúde ##########################################################
-	public function saudebasica_login() {
-		$this->login();
-		$this->render('login');
-	}
-
-	// #########################################################################
-	// Ações do recepcionista ##################################################
-	public function recepcionista_login() {
-		$this->login();
-		$this->render('login');
-	}
-
-	// #########################################################################
-	// Ações da atendente ######################################################
-	public function atendente_login() {
-		$this->login();
-		$this->render('login');
-	}
-
-	// #########################################################################
-	// Ações do gerente ########################################################
-	public function gerente_login() {
-		$this->login();
-		$this->render('login');
-	}
-	
 	// #########################################################################
 	// Ações do admin ##########################################################
 	public function admin_relatorioLogins() {

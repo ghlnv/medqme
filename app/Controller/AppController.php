@@ -68,13 +68,12 @@ class AppController extends Controller {
 		parent::beforeFilter();
 		$this->dataToParam();
 		if($this->RequestHandler->isAjax()) {
-            if(!$this->Auth->user()) {
-				$this->Session->setFlash('Sua sessão expirou, por favor faça novamente o login.', 'default', array(), 'auth');
-				
-				$url = Router::url('/usuarios/login');
+            if(!$this->isAuthorized()) {
+				$this->Session->destroy();
+				$url = Router::url($this->Auth->logout());
 				echo "<script>window.location.href = '$url';</script>";
 				die();
-            }
+			}
         }
 	}
 	public function beforeRender() {

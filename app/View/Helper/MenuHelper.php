@@ -1,6 +1,6 @@
 <?php
 class MenuHelper extends AppHelper { 
-    var $helpers = array('Html', 'Js', 'Form', 'Text', 'Number'); 
+    var $helpers = array('Html', 'Js', 'Form', 'Text', 'Number', 'Usuarios'); 
 
 	// #########################################################################
 	// Métodos #################################################################
@@ -46,17 +46,17 @@ class MenuHelper extends AppHelper {
 				'controller' => 'usuarios',
 				'action' => 'login',
 			),
-			'style' => 'padding: 0 20px; font-size: 0.9em;',
+			'style' => 'padding: 0 20px 25px; font-size: 0.9em;',
 		));
 
-		$ret.= $this->Html->tag('div', null, ['style' => 'display: inline-block; width: 40%;']);
+		$ret.= $this->Html->tag('div', null, ['style' => 'display: inline-block; width: 42%;']);
 		$ret.= $this->Form->input('login', array(
 			'label' => 'Login',
 			'class' => 'form-control',
 		));
 		$ret.= $this->Html->tag('/div');
 		
-		$ret.= $this->Html->tag('div', null, ['style' => 'display: inline-block; width: 40%;']);
+		$ret.= $this->Html->tag('div', null, ['style' => 'display: inline-block; width: 42%;']);
 		$ret.= $this->Form->input('senha', array(
 			'label' => 'Senha', 
 			'class' => 'form-control',
@@ -64,17 +64,18 @@ class MenuHelper extends AppHelper {
 		));
 		$ret.= $this->Html->tag('/div');
 
-		$ret.= $this->Html->tag('div', null, ['style' => 'display: inline-block; width: 20%;']);
+		$ret.= $this->Html->tag('div', null, ['style' => 'display: inline-block; width: 16%;']);
 		$ret.= $this->Form->submit('Entrar', array(
 			'div' => array(
 				'class' => 'input',
-				'style' => 'clear: none; text-align: center;',
+				'style' => 'clear: none;',
 			),
 			'class' => 'btn btn-primary',
-			'style' => 'margin-top: 20px;',
+			'style' => 'margin-top: 23px; width: 100%;',
 		));
 		$ret.= $this->Html->tag('/div');
 
+		$ret.= $this->Usuarios->linkParaEsqueciMinhaSenha();
 		$ret.= $this->Form->end();
 		return $ret;
 	}

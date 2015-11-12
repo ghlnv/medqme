@@ -1,6 +1,6 @@
 <?php
 class PessoasHelper extends AppHelper { 
-    var $helpers = array('Html', 'Js', 'Form', 'Gerar'); 
+    var $helpers = array('Html', 'Js', 'Form', 'Gerar', 'Usuarios'); 
 
 	// #########################################################################
 	// Métodos #################################################################
@@ -41,7 +41,7 @@ class PessoasHelper extends AppHelper {
 			'class' => 'form-control',
 			'type' => 'password',
 		));
-
+		$ret.= $this->Usuarios->linkParaEsqueciMinhaSenha();
 		$ret.= $this->Form->submit('Entrar', array(
 			'div' => array(
 				'class' => 'input',
@@ -49,7 +49,6 @@ class PessoasHelper extends AppHelper {
 			),
 			'class' => 'btn btn-primary',
 		));
-
 		$ret.= $this->Form->end();
 		return $ret;
 	}

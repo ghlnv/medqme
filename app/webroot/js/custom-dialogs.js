@@ -1,3 +1,23 @@
+function loadDlgEsqueciMinhaSenha() {
+	$(".dlgEsqueciMinhaSenha").click(function() {
+		var dlgDoContent = createDialog($(this).attr("href"), $(this).attr("title"));
+		dlgDoContent.dialog({
+			modal: true,
+			width: 350,
+			resizable: false,
+			position: { at: 'center top' },
+			buttons: {
+				"Gerar nova senha": function() { 
+					submitFormOrCloseDialog(this);
+				}
+			},
+			close: function(){
+				$(this).remove();
+			}
+		});	
+		return false;
+	});
+}
 function loadDlgImportar() {
 	$(".dlgImportar").click(function() {
 		var dlgDoContent = createDialog($(this).attr("href"), $(this).attr("title"));

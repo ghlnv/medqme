@@ -1,6 +1,5 @@
 <?php
-$primeiroNome = explode(' ', $admin['Pessoa']['nome']);
-$primeiroNome = reset($primeiroNome);
+$primeiroNome = $this->Gerar->explodeReset($admin['Pessoa']['nome']);
 
 echo "Olá $primeiroNome, um novo cadastro foi efetuado!";
 echo $this->Html->tag('br');
