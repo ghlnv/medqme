@@ -4,33 +4,7 @@ echo $this->Html->tag('div', null, array(
 ));
 echo $this->Session->flash('auth');
 
-echo $this->Form->create('Usuario', array(
-	'url' => array(
-		'controller' => 'usuarios',
-		'action' => 'login',
-	),
-	'class' => 'cake',
-));
-
-echo $this->Form->input('login', array(
-	'label' => 'Login',
-	'class' => 'form-control',
-));
-echo $this->Form->input('senha', array(
-	'label' => 'Senha', 
-	'class' => 'form-control',
-	'type' => 'password',
-));
-
-echo $this->Form->submit('Entrar', array(
-	'div' => array(
-		'class' => 'input',
-		'style' => 'clear: none; text-align: right'
-	),
-	'class' => 'btn btn-primary',
-));
-
-echo $this->Form->end();
+echo $this->Pessoas->formLogin();
 
 echo $this->Html->tag('br');
 echo $this->Html->tag('br');

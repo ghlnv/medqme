@@ -11,3 +11,11 @@ echo $this->Html->tag('b', $usuario['Usuario']['login']);
 echo $this->Html->tag('br');
 echo ' senha: ';
 echo $this->Html->tag('b', $usuario['Usuario']['nova_senha']);
+echo $this->Html->tag('br');
+echo $this->Html->tag('br');
+echo $this->Html->link('Clique aqui para ir para a página inicial...', 
+	$this->Html->url('/', true),
+	[
+		'escape' => false,
+	]
+);

@@ -35,6 +35,49 @@ class MenuHelper extends AppHelper {
 		$ret.= $this->Html->tag('/li');
 		return $ret;
 	}
+	public function formLogin() {
+		if('usuarios' == $this->request->params['controller']
+		&& 'login' == $this->request->params['action']) {
+			return false;
+		}
+		$ret = '';
+		$ret.= $this->Form->create('Usuario', array(
+			'url' => array(
+				'controller' => 'usuarios',
+				'action' => 'login',
+			),
+			'style' => 'padding: 0 20px; font-size: 0.9em;',
+		));
+
+		$ret.= $this->Html->tag('div', null, ['style' => 'display: inline-block; width: 40%;']);
+		$ret.= $this->Form->input('login', array(
+			'label' => 'Login',
+			'class' => 'form-control',
+		));
+		$ret.= $this->Html->tag('/div');
+		
+		$ret.= $this->Html->tag('div', null, ['style' => 'display: inline-block; width: 40%;']);
+		$ret.= $this->Form->input('senha', array(
+			'label' => 'Senha', 
+			'class' => 'form-control',
+			'type' => 'password',
+		));
+		$ret.= $this->Html->tag('/div');
+
+		$ret.= $this->Html->tag('div', null, ['style' => 'display: inline-block; width: 20%;']);
+		$ret.= $this->Form->submit('Entrar', array(
+			'div' => array(
+				'class' => 'input',
+				'style' => 'clear: none; text-align: center;',
+			),
+			'class' => 'btn btn-primary',
+			'style' => 'margin-top: 20px;',
+		));
+		$ret.= $this->Html->tag('/div');
+
+		$ret.= $this->Form->end();
+		return $ret;
+	}
 	public function login() {
 		$sairLabel = '';
 		$sairLabel.= $this->Html->tag('i', '', ['class' => 'fa fa-sign-in']);

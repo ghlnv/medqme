@@ -22,12 +22,39 @@ class PessoasHelper extends AppHelper {
 		$ret.= $pessoa['Pessoa']['cr'];
 		return $ret;
 	}
+	public function formLogin() {
+		$ret = '';
+		$ret.= $this->Form->create('Usuario', array(
+			'url' => array(
+				'controller' => 'usuarios',
+				'action' => 'login',
+			),
+			'class' => 'cake',
+		));
+
+		$ret.= $this->Form->input('login', array(
+			'label' => 'Login',
+			'class' => 'form-control',
+		));
+		$ret.= $this->Form->input('senha', array(
+			'label' => 'Senha', 
+			'class' => 'form-control',
+			'type' => 'password',
+		));
+
+		$ret.= $this->Form->submit('Entrar', array(
+			'div' => array(
+				'class' => 'input',
+				'style' => 'clear: none; text-align: right'
+			),
+			'class' => 'btn btn-primary',
+		));
+
+		$ret.= $this->Form->end();
+		return $ret;
+	}
 	public function formRegistro() {
 		$ret = '';
-		$ret.= $this->Html->tag('div', null, ['class' => 'container']);
-		$ret.= $this->Html->tag('div', null, ['class' => 'col-md-8']);
-		$ret.= $this->Html->tag('h2', 'Registre-se!');
-		$ret.= $this->Html->tag('hr');
 		$ret.= $this->Form->create('Pessoa', array(
 			'url' => [
 				'controller' => 'pessoas',
@@ -72,8 +99,6 @@ class PessoasHelper extends AppHelper {
 			'class' => 'btn btn-primary',
 		]);
 		$ret.= $this->Form->end();
-		$ret.= $this->Html->tag('/div');
-		$ret.= $this->Html->tag('/div');
 		return $ret;
 	}
 	public function formEditarLoginSenha() {

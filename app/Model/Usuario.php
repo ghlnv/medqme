@@ -290,6 +290,9 @@ class Usuario extends AppModel {
 	}
 	private function reportarAdminSobreUsuarioCadastrado(&$usuario) {
 		$admin = $this->buscarAdmin();
+		if(!Validation::email($admin['Pessoa']['email'])) {
+			return false;
+		}
 		
 		$email = new CakeEmail('default');
 		$email->template('admin_novo_cadastro');
