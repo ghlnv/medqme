@@ -29,5 +29,6 @@ App::uses('Helper', 'View');
  *
  * @package       app.View.Helper
  */
+App::uses('String', 'Utility');
 class AppHelper extends Helper {
 }
