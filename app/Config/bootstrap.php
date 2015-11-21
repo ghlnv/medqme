@@ -116,11 +116,18 @@ CakeLog::config('error', array(
 CakePlugin::load('DebugKit');
 
 Configure::write('Usuario.tipos', array(
-	'Pessoa Comum' => 'Pessoa Comum',
+	'Pessoa Comum' => 'Usuário',
 	'Estudante' => 'Estudante',
 	'Profissional de Saúde' => 'Profissional de Saúde',
 ));
 Configure::write('Estudante.escolaridades', array(
 	'Graduando' => 'Graduando',
 	'Residente' => 'Residente',
+));
+Configure::write('Periodicidade.tipos', array(
+	'+4 hours' => 'A cada 4 horas',
+	'+6 hours' => 'A cada 6 horas',
+	'+8 hours' => 'A cada 8 horas',
+	'+12 hours' => 'A cada 12 horas',
+	'+24 hours' => '1 vez ao dia',
 ));

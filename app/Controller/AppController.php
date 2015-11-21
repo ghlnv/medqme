@@ -52,8 +52,8 @@ class AppController extends Controller {
 		'Session',
 		'Role',
 		'RequestHandler',
+		'Paginator',
 		'DebugKit.Toolbar' => array('panels' => array('history' => false)),
-//		'Captcha',
 	);
 	public $helpers = array(
 		'Html',

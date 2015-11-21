@@ -15,7 +15,23 @@
 	}
 }
 @media only screen and (max-width: 650px) {
-	
+	/******************************************************************************/
+	/* Columns inline-block *******************************************************/
+	.col-ib-1,
+	.col-ib-2,
+	.col-ib-3,
+	.col-ib-4,
+	.col-ib-5,
+	.col-ib-6,
+	.col-ib-7,
+	.col-ib-8,
+	.col-ib-9,
+	.col-ib-10,
+	.col-ib-11,
+	.col-ib-12 {
+		display: block;
+		width: 100%;
+	}
 }
 
 @media only screen and (max-width: 550px) {

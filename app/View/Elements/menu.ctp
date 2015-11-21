@@ -27,9 +27,18 @@ if(AuthComponent::user()) {
 		);
 	}
 	// paciente #############################################################
-//	else if ($role->isPaciente()) {
-//		
-//	}
+	else {
+		echo $this->Menu->li('Minhas receitas',
+			[
+				'admin' => false,
+				'controller' => 'receitas',
+				'action' => 'index',
+			],
+			[
+				'title' => 'Minhas receitas',
+			]
+		);
+	}
 	echo $this->Html->tag('/ul');
 	
 	// perfil e logout #########################################################

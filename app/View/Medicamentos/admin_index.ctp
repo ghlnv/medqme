@@ -103,13 +103,13 @@ foreach($medicamentos as $medicamento) {
 		'class' => 'col-md-2',
 		'style' => 'margin-bottom: 10px; text-align: right;'
 	));
-	echo $this->Html->tag('span', 'PMC 0: ', [
+	echo $this->Html->tag('span', 'PMC 18%: ', [
 		'class' => 'smallText',
 	]);
 	echo $this->Html->tag('span', null, [
 		'style' => 'font-weight: bolder; font-size: 1.1em; white-space: nowrap;'
 	]);
-	echo $this->Gerar->moedaReal($medicamento['Medicamento']['pmc_0']);
+	echo $this->Gerar->moedaReal($medicamento['Medicamento']['pmc_18']);
 	echo $this->Html->tag('/span');
 	echo $this->Html->tag('/div');
 	

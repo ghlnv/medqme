@@ -22,6 +22,7 @@ echo $this->Html->tag('div', null, [
 ]);
 echo $this->Html->tag('div', null, [
 	'class' => 'paging',
+	'style' => 'text-align: right;',
 ]);
 echo $this->Paginator->prev('< anterior', array(), null, array('class' => 'prev disabled'));
 echo $this->Paginator->numbers([

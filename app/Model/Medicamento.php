@@ -24,6 +24,52 @@ class Medicamento extends AppModel {
 	
 	// #########################################################################
 	// Métodos #################################################################
+	public function listarPorNomeEDosagem($nome, $dosagem) {
+		$dosagemExploded = explode(' ', $dosagem);
+		$unidade = trim(end($dosagemExploded));
+		$dosagem = trim(str_replace($dosagem, $unidade, ''));
+		
+		$medicamentos = $this->find('all', array(
+			'conditions' => [
+				'Medicamento.nome LIKE' => "%$nome%",
+				'Medicamento.dosagem LIKE' => "%$dosagem%",
+				'Medicamento.unidade LIKE' => "%$unidade%",
+			],
+			'contain' => false,
+		));
+		$ret = [];
+		foreach($medicamentos as $medicamento) {
+			$medicamentoId = $medicamento['Medicamento']['id'];
+			
+			$ret[$medicamentoId] = '';
+			$ret[$medicamentoId].= $medicamento['Medicamento']['nome'];
+			$ret[$medicamentoId].= ' | ';
+			$ret[$medicamentoId].= $medicamento['Medicamento']['apresentacao_reduzida'];
+		}
+		return $ret;
+	}
+	public function listarDosagens($nome) {
+		$medicamentos = $this->find('all', array(
+			'conditions' => [
+				'Medicamento.nome LIKE' => "%$nome%",
+				'Medicamento.dosagem IS NOT NULL',
+			],
+			'contain' => false,
+			'group' => [
+				'Medicamento.dosagem',
+				'Medicamento.unidade',
+			]
+		));
+		$ret = [];
+		foreach($medicamentos as $medicamento) {
+			$dosagemString = '';
+			$dosagemString.= $medicamento['Medicamento']['dosagem'];
+			$dosagemString.= ' ';
+			$dosagemString.= $medicamento['Medicamento']['unidade'];
+			$ret[$dosagemString] = $dosagemString;
+		}
+		return $ret;
+	}
 	public function principiosAtivosUnicos($keyword = null) {
 		$options = array(
 			'fields' => array('DISTINCT(Medicamento.principio_ativo) as principio_ativo'),

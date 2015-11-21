@@ -21,6 +21,14 @@ function loadPopup($popupId) {
 		return false;
 	});
 }
+function loadFormSubmitLink($selector) {
+	$($selector).click(function(){
+		var $form = $(this).closest('form');
+		$form.attr('action', $(this).attr('href'));
+		$form.submit();
+		return false;
+	});
+}
 function loadCaptchaImage(imageSelector, url) {
 	url+= '?';
 	url+= Math.round(Math.random(0)*1000)+1;

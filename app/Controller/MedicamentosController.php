@@ -14,6 +14,10 @@ class MedicamentosController extends AppController {
 			$this->Role->error();
 		}
 	}
+	public function autocompleteNome() {
+		$this->set('data', $this->Medicamento->nomesUnicos($_GET['term']));
+		$this->render('admin_jsonAutocomplete');
+	}
 
 	// #########################################################################
 	// Ações do admin ##########################################################
@@ -22,8 +26,7 @@ class MedicamentosController extends AppController {
 		$this->render('admin_jsonAutocomplete');
 	}
 	public function admin_autocompleteNome() {
-		$this->set('data', $this->Medicamento->nomesUnicos($_GET['term']));
-		$this->render('admin_jsonAutocomplete');
+		$this->autocompleteNome();
 	}
 	public function admin_cadastrar() {
 		if(!empty($this->request->data)) {
@@ -105,7 +108,6 @@ class MedicamentosController extends AppController {
 		}
 		$this->paginate['Medicamento']['contain'] = false;
 		$this->set('medicamentos', $this->paginate('Medicamento'));
-//		$this->set('pessoas', $this->Pessoa->listarMedicos());
 	}
 
 	// #########################################################################

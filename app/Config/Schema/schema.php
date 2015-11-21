@@ -452,6 +452,81 @@ class AppSchema extends CakeSchema {
 			'engine' => 'MyISAM'
 		)
 	);
+	var $receitas = array(
+		'id' => array(
+			'type' => 'integer',
+			'null' => false,
+			'default' => NULL,
+			'key' => 'primary'
+		),
+		'pessoa_id' => array(
+			'type' => 'integer',
+			'null' => false,
+			'default' => NULL,
+			'key' => 'index'
+		),
+		'medicamento_id' => array(
+			'type' => 'integer',
+			'null' => false,
+			'default' => NULL,
+			'key' => 'index'
+		),
+		'nome' => array(
+			'type' => 'string',
+			'null' => true,
+			'default' => NULL,
+		),
+		'inicio' => array(
+			'type' => 'date',
+			'null' => false,
+			'default' => NULL,
+		),
+		'termino' => array(
+			'type' => 'date',
+			'null' => false,
+			'default' => NULL,
+		),
+		'dosagem' => array(
+			'type' => 'string',
+			'null' => true,
+			'default' => NULL,
+		),
+		'periodicidade' => array(
+			'type' => 'string',
+			'null' => false,
+			'default' => NULL,
+		),
+		'observacoes' => array(
+			'type' => 'string',
+			'null' => true,
+			'default' => NULL,
+		),
+		'created' => array(
+			'type' => 'datetime',
+			'null' => true,
+			'default' => NULL
+		),
+		'modified' => array(
+			'type' => 'datetime',
+			'null' => true,
+			'default' => NULL
+		),
+		'indexes' => array(
+			'PRIMARY' => array(
+				'column' => 'id',
+				'unique' => 1
+			),
+			'fk_receitas_pessoas' => array(
+				'column' => 'pessoa_id',
+				'unique' => 0
+			),
+		),
+		'tableParameters' => array(
+			'charset' => 'utf8',
+			'collate' => 'utf8_general_ci',
+			'engine' => 'MyISAM'
+		)
+	);
 	var $usuarios = array(
 		'id' => array(
 			'type' => 'integer',

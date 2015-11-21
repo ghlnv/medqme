@@ -44,6 +44,20 @@ class AppModel extends Model {
 	
 	// #########################################################################
 	// Métodos #################################################################
+	public function buscar($id) {
+		$this->recursive = -1;
+		return $this->find('first', [
+			'conditions' => ['id' => $id],
+			'contain' => false,
+		]);
+	}
+	public function cadastrar($requestData) {
+		$this->create();
+		return $this->save($requestData);
+	}
+	public function atualizar($requestData) {
+		return $this->save($requestData);
+	}
 	public function imageCrop($fullPath, $newFileFullPath, $options) {  
 		$filetype = exif_imagetype($fullPath);
 		$allowedTypes = array( 

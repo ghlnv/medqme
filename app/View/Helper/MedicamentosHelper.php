@@ -85,6 +85,7 @@ class MedicamentosHelper extends AppHelper {
 	public function formBuscaPadrao() {
 		$inputId = String::uuid();
 		$urlAutocomplete = $this->Html->url(array(
+			'admin' => false,
 			'controller' => 'medicamentos',
 			'action' => 'autocompleteNome',
 		), true);
