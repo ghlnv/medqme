@@ -95,7 +95,7 @@ class MedicamentosController extends AppController {
 		if(!empty($this->request->params['named']['keywords'])) {
 			$tokens = explode(' ', trim($this->request->params['named']['keywords']));
 			foreach($tokens as $token) {
-				$this->paginate['Medicamento']['conditions'][]['OR'] = array(
+				$this->Paginator->settings['conditions'][]['OR'] = array(
 					'Medicamento.codigo LIKE' => "%$token%",
 					'Medicamento.principio_ativo LIKE' => "%$token%",
 					'Medicamento.laboratorio LIKE' => "%$token%",
@@ -106,8 +106,8 @@ class MedicamentosController extends AppController {
 				);
 			}
 		}
-		$this->paginate['Medicamento']['contain'] = false;
-		$this->set('medicamentos', $this->paginate('Medicamento'));
+		$this->Paginator->settings['contain'] = false;
+		$this->set('medicamentos', $this->Paginator->paginate('Medicamento'));
 	}
 
 	// #########################################################################

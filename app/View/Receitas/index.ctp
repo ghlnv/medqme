@@ -2,7 +2,7 @@
 echo $this->Html->tag('div', null, ['class' => 'container']);
 echo $this->Html->tag('div', null, ['class' => 'col-ib-10']);
 echo $this->Html->tag('h1');
-echo __('Minhas Receitas');
+echo __('Meus Remédios');
 echo $this->Html->tag('/h1');
 echo $this->Html->tag('/div');
 echo $this->Html->tag('div', null, [

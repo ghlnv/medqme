@@ -33,7 +33,7 @@ class ReceitasHelper extends AppHelper {
 		);
 	}
 	public function linkParaCadastrar() {
-		return $this->Html->link("nova receita &#10097;",
+		return $this->Html->link("novo remédio &#10097;",
 			array(
 				'admin' => false,
 				'controller' => 'receitas',
@@ -41,7 +41,7 @@ class ReceitasHelper extends AppHelper {
 			),
 			array(
 				'class' => 'dlgCadastrarPadrao btn btn-primary',
-				'title' => 'Cadastrar nova receita',
+				'title' => 'Cadastrar novo remédio',
 				'style' => '',
 				'escape' => false
 			)

@@ -28,14 +28,14 @@ if(AuthComponent::user()) {
 	}
 	// paciente #############################################################
 	else {
-		echo $this->Menu->li('Minhas receitas',
+		echo $this->Menu->li('Meus remédios',
 			[
 				'admin' => false,
 				'controller' => 'receitas',
 				'action' => 'index',
 			],
 			[
-				'title' => 'Minhas receitas',
+				'title' => 'Meus remédios',
 			]
 		);
 	}

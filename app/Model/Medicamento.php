@@ -32,8 +32,8 @@ class Medicamento extends AppModel {
 		$medicamentos = $this->find('all', array(
 			'conditions' => [
 				'Medicamento.nome LIKE' => "%$nome%",
-				'Medicamento.dosagem LIKE' => "%$dosagem%",
-				'Medicamento.unidade LIKE' => "%$unidade%",
+				'Medicamento.dosagem LIKE' => "$dosagem",
+				'Medicamento.unidade LIKE' => "$unidade",
 			],
 			'contain' => false,
 		));
@@ -45,6 +45,10 @@ class Medicamento extends AppModel {
 			$ret[$medicamentoId].= $medicamento['Medicamento']['nome'];
 			$ret[$medicamentoId].= ' | ';
 			$ret[$medicamentoId].= $medicamento['Medicamento']['apresentacao_reduzida'];
+			$ret[$medicamentoId].= ' | ';
+			$ret[$medicamentoId].= $medicamento['Medicamento']['laboratorio'];
+			$ret[$medicamentoId].= ' | R$ ';
+			$ret[$medicamentoId].= number_format($medicamento['Medicamento']['pmc_18'], ',', '.');
 		}
 		return $ret;
 	}
