@@ -59,18 +59,33 @@ class Medicamento extends AppModel {
 				'Medicamento.dosagem IS NOT NULL',
 			],
 			'contain' => false,
-			'group' => [
-				'Medicamento.dosagem',
-				'Medicamento.unidade',
-			]
 		));
 		$ret = [];
 		foreach($medicamentos as $medicamento) {
+			$key = '';
 			$dosagemString = '';
-			$dosagemString.= $medicamento['Medicamento']['dosagem'];
-			$dosagemString.= ' ';
-			$dosagemString.= $medicamento['Medicamento']['unidade'];
-			$ret[$dosagemString] = $dosagemString;
+			$key.= $medicamento['Medicamento']['dosagem'];
+			$key.= ' ';
+			$key.= $medicamento['Medicamento']['unidade'];
+			
+			if($medicamento['Medicamento']['formas_farmaceuticas_solidas']) {
+				$dosagemString.= ' | ';
+				$dosagemString.= $medicamento['Medicamento']['formas_farmaceuticas_solidas'];
+			}
+			if($medicamento['Medicamento']['formas_farmaceuticas_liquidas']) {
+				$dosagemString.= ' | ';
+				$dosagemString.= $medicamento['Medicamento']['formas_farmaceuticas_liquidas'];
+			}
+			if($medicamento['Medicamento']['formas_farmaceuticas_semisolidas']) {
+				$dosagemString.= ' | ';
+				$dosagemString.= $medicamento['Medicamento']['formas_farmaceuticas_semisolidas'];
+			}
+			if($medicamento['Medicamento']['formas_farmaceuticas_gasosas']) {
+				$dosagemString.= ' | ';
+				$dosagemString.= $medicamento['Medicamento']['formas_farmaceuticas_gasosas'];
+			}
+			
+			$ret[$key] = $key.$dosagemString;
 		}
 		return $ret;
 	}
