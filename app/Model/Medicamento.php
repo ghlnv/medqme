@@ -27,7 +27,7 @@ class Medicamento extends AppModel {
 	public function listarPorNomeEDosagem($nome, $dosagem) {
 		$dosagemExploded = explode(' ', $dosagem);
 		$unidade = trim(end($dosagemExploded));
-		$dosagem = trim(str_replace($dosagem, $unidade, ''));
+		$dosagem = trim(str_replace($unidade, '', $dosagem));
 		
 		$medicamentos = $this->find('all', array(
 			'conditions' => [
@@ -48,7 +48,7 @@ class Medicamento extends AppModel {
 			$ret[$medicamentoId].= ' | ';
 			$ret[$medicamentoId].= $medicamento['Medicamento']['laboratorio'];
 			$ret[$medicamentoId].= ' | R$ ';
-			$ret[$medicamentoId].= number_format($medicamento['Medicamento']['pmc_18'], ',', '.');
+			$ret[$medicamentoId].= number_format($medicamento['Medicamento']['pmc_18'], 2, ',', '.');
 		}
 		return $ret;
 	}
