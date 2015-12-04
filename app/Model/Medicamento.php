@@ -50,6 +50,9 @@ class Medicamento extends AppModel {
 				'embalagens_secundarias',
 				'acessorios',
 			],
+			'conditions' => [
+				'Medicamento.restricao_hospitalar' => false,
+			],
 			'contain' => false,
 		]);
 	}
