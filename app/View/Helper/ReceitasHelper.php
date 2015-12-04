@@ -18,19 +18,30 @@ class ReceitasHelper extends AppHelper {
 		return $this->periodicidades[$periodicidade];
 	}
 	public function linkVoltarParaIndex() {
-		return $this->Html->link("&#10096;",
-			array(
+		if(2 > count($this->request->params['pass'])) {
+			$url = [
 				'admin' => false,
 				'controller' => 'receitas',
 				'action' => 'index',
-			),
-			array(
-				'class' => '',
-				'title' => 'Voltar para receitas',
-				'style' => '',
-				'escape' => false
-			)
-		);
+			];
+		}
+		else {
+			$url = [
+				'action' => $this->request->action,
+				$this->request->params['pass'][0],
+			];
+			
+			$passo = $this->request->params['pass'][1]-1;
+			if(1 < $passo) {
+				$url[] = $passo;
+			}
+		}
+		return $this->Html->link("&#10096;", $url, [
+			'class' => '',
+			'title' => 'Voltar para receitas',
+			'style' => '',
+			'escape' => false
+		]);
 	}
 	public function linkParaCadastrar() {
 		return $this->Html->link("novo remédio &#10097;",
