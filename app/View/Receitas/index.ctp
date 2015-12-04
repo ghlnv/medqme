@@ -17,7 +17,7 @@ foreach($receitas as $receita) {
 	echo $this->Html->tag('tr');
 	echo $this->Html->tag('td', null, ['style' => 'line-height: 30px;']);
 	echo $this->Html->tag('div', null, ['class' => 'row']);
-	echo $this->Html->tag('div', null, ['class' => 'col-md-10']);
+	echo $this->Html->tag('div', null, ['class' => 'col-md-9']);
 	echo $this->Html->tag('b');
 	echo $receita['Receita']['nome'];
 	echo $this->Html->tag('/b');
@@ -37,9 +37,23 @@ foreach($receitas as $receita) {
 	}
 	echo $this->Html->tag('/div');
 	echo $this->Html->tag('/div');
+	
+	echo $this->Html->tag('div', null, array(
+		'class' => 'col-md-3',
+		'style' => 'margin-bottom: 10px; text-align: right;'
+	));
+	echo $this->Html->tag('span', 'Preço sugerido: ', [
+		'class' => 'smallText',
+	]);
+	echo $this->Html->tag('span', null, [
+		'style' => 'font-weight: bolder; font-size: 1.1em; white-space: nowrap;'
+	]);
+	echo $this->Gerar->moedaReal($receita['Medicamento']['pmc_18']);
+	echo $this->Html->tag('/span');
+	echo $this->Html->tag('/div');
 
 	echo $this->Html->tag('div', null, array(
-		'class' => 'col-md-2',
+		'class' => 'col-md-3',
 		'style' => 'text-align: right;'
 	));
 	echo $this->Receitas->linkParaEditar($receita['Receita']);

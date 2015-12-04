@@ -24,16 +24,25 @@ class Medicamento extends AppModel {
 	
 	// #########################################################################
 	// Métodos #################################################################
-	public function listarPorNomeEDosagem($nome, $dosagem) {
-		$dosagemExploded = explode(' ', $dosagem);
+	public function listarPorNomeEDosagem($nome, $dosagemEForma) {
+		$dosagemEFormaExploded = explode(' | ', $dosagemEForma);
+		$dosagemExploded = explode(' ', $dosagemEFormaExploded[0]);
+		$dosagem = trim(reset($dosagemExploded));
 		$unidade = trim(end($dosagemExploded));
 		$dosagem = trim(str_replace($unidade, '', $dosagem));
+		$dosagemEForma = trim(end($dosagemEFormaExploded));
 		
 		$medicamentos = $this->find('all', array(
 			'conditions' => [
 				'Medicamento.nome LIKE' => "%$nome%",
 				'Medicamento.dosagem LIKE' => "$dosagem",
 				'Medicamento.unidade LIKE' => "$unidade",
+				'OR' => [
+					'Medicamento.formas_farmaceuticas_solidas LIKE' => "%$dosagemEForma%",
+					'Medicamento.formas_farmaceuticas_liquidas LIKE' => "%$dosagemEForma%",
+					'Medicamento.formas_farmaceuticas_semisolidas LIKE' => "%$dosagemEForma%",
+					'Medicamento.formas_farmaceuticas_gasosas LIKE' => "%$dosagemEForma%",
+				],
 			],
 			'contain' => false,
 		));
@@ -63,29 +72,28 @@ class Medicamento extends AppModel {
 		$ret = [];
 		foreach($medicamentos as $medicamento) {
 			$key = '';
-			$dosagemString = '';
 			$key.= $medicamento['Medicamento']['dosagem'];
 			$key.= ' ';
 			$key.= $medicamento['Medicamento']['unidade'];
 			
 			if($medicamento['Medicamento']['formas_farmaceuticas_solidas']) {
-				$dosagemString.= ' | ';
-				$dosagemString.= $medicamento['Medicamento']['formas_farmaceuticas_solidas'];
+				$key.= ' | ';
+				$key.= $medicamento['Medicamento']['formas_farmaceuticas_solidas'];
 			}
 			if($medicamento['Medicamento']['formas_farmaceuticas_liquidas']) {
-				$dosagemString.= ' | ';
-				$dosagemString.= $medicamento['Medicamento']['formas_farmaceuticas_liquidas'];
+				$key.= ' | ';
+				$key.= $medicamento['Medicamento']['formas_farmaceuticas_liquidas'];
 			}
 			if($medicamento['Medicamento']['formas_farmaceuticas_semisolidas']) {
-				$dosagemString.= ' | ';
-				$dosagemString.= $medicamento['Medicamento']['formas_farmaceuticas_semisolidas'];
+				$key.= ' | ';
+				$key.= $medicamento['Medicamento']['formas_farmaceuticas_semisolidas'];
 			}
 			if($medicamento['Medicamento']['formas_farmaceuticas_gasosas']) {
-				$dosagemString.= ' | ';
-				$dosagemString.= $medicamento['Medicamento']['formas_farmaceuticas_gasosas'];
+				$key.= ' | ';
+				$key.= $medicamento['Medicamento']['formas_farmaceuticas_gasosas'];
 			}
 			
-			$ret[$key] = $key.$dosagemString;
+			$ret[$key] = $key;
 		}
 		return $ret;
 	}
