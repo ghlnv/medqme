@@ -81,6 +81,7 @@ function loadMask() {
 	$('.phone').mask('(00) 0000-0000');
 	$('.cpf').mask('000.000.000-00', {reverse: true});
 	$('.money').mask('000.000.000.000.000,00', {reverse: true});
+	$('.integer').mask('000.000.000.000.000', {reverse: true});
 	
 	$('.telefone').each(function(){
 		var $length = $(this).val().replace(/\D/g, '').length;

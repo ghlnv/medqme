@@ -111,6 +111,7 @@ class ReceitasHelper extends AppHelper {
 	}
 	public function formCadastro($passo) {
 		$this->Js->buffer("loadDatePicker();");
+		$this->Js->buffer("loadMask();");
 		$this->Js->buffer("loadFormSubmitLink('.submitLink');");
 		
 		$ret = '';
@@ -159,11 +160,14 @@ class ReceitasHelper extends AppHelper {
 					'class' => 'date form-control',
 					'value' => $this->Gerar->brDate($this->request->data['Receita']['inicio']),
 				));
-				$ret.= $this->Form->input('Receita.termino', array(
-					'div' => ['style' => 'display: inline-block; width: auto;'],
+				$ret.= $this->Form->input('Receita.dias', array(
+					'div' => ['style' => 'display: inline-block; width: 130px;'],
+					'label' => 'Tratamento',
 					'type' => 'text',
-					'class' => 'date form-control',
-					'value' => $this->Gerar->brDate($this->request->data['Receita']['termino']),
+					'class' => 'form-control integer',
+					'maxlength' => 3,
+					'style' => 'display: inline; width: 70px; text-align: center;',
+					'after' => ' dias',
 				));
 				$ret.= $this->Form->input('Receita.periodicidade', array(
 					'div' => ['style' => 'display: inline-block; width: auto;'],

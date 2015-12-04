@@ -9,9 +9,9 @@ class Receita extends AppModel {
 	
 	public $displayField = 'nome';
 	public $order = array(
-		'Receita.nome' => 'ASC',
-		'Receita.inicio' => 'ASC',
+		'Receita.inicio' => 'DESC',
 		'Receita.termino' => 'ASC',
+		'Receita.nome' => 'ASC',
 	);
 	
 	public $belongsTo = [
@@ -38,6 +38,12 @@ class Receita extends AppModel {
 			),
 		),
 		'inicio' => array(
+			'notBlank' => array(
+				'rule' => 'notBlank',
+				'message' => 'Campo obrigatório',
+			),
+		),
+		'dias' => array(
 			'notBlank' => array(
 				'rule' => 'notBlank',
 				'message' => 'Campo obrigatório',
@@ -71,9 +77,12 @@ class Receita extends AppModel {
 	public function atualizar($requestData) {
 		if(!empty($requestData['Receita']['inicio'])) {
 			$this->beforeSaveBrDate($requestData['Receita']['inicio']);
-		}
-		if(!empty($requestData['Receita']['termino'])) {
-			$this->beforeSaveBrDate($requestData['Receita']['termino']);
+			
+			if(!empty($requestData['Receita']['dias'])) {
+				$inicio = $requestData['Receita']['inicio'];
+				$dias = $requestData['Receita']['dias'];
+				$requestData['Receita']['termino'] = date('Y-m-d', strtotime("$inicio +$dias days"));
+			}
 		}
 		return $this->save($requestData);
 	}

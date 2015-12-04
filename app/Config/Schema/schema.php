@@ -467,7 +467,7 @@ class AppSchema extends CakeSchema {
 		),
 		'medicamento_id' => array(
 			'type' => 'integer',
-			'null' => false,
+			'null' => true,
 			'default' => NULL,
 			'key' => 'index'
 		),
@@ -478,12 +478,17 @@ class AppSchema extends CakeSchema {
 		),
 		'inicio' => array(
 			'type' => 'date',
-			'null' => false,
+			'null' => true,
+			'default' => NULL,
+		),
+		'dias' => array(
+			'type' => 'integer',
+			'null' => true,
 			'default' => NULL,
 		),
 		'termino' => array(
 			'type' => 'date',
-			'null' => false,
+			'null' => true,
 			'default' => NULL,
 		),
 		'dosagem' => array(
