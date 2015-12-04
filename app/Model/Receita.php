@@ -19,6 +19,12 @@ class Receita extends AppModel {
 	];
 
 	public $validate = array(
+		'pessoa_id' => array(
+			'notBlank' => array(
+				'rule' => 'notBlank',
+				'message' => 'Campo obrigatório',
+			),
+		),
 		'medicamento_id' => array(
 			'notBlank' => array(
 				'rule' => 'notBlank',
@@ -53,6 +59,15 @@ class Receita extends AppModel {
 	
 	// #########################################################################
 	// Métodos #################################################################
+	public function mobileAtivos($pessoaId) {
+		return $this->find('all', [
+			'conditions' => [
+				'Receita.pessoa_id' => $pessoaId,
+				'Receita.termino >=' => date('Y-m-d'),
+			],
+			'contain' => false,
+		]);
+	}
 	public function atualizar($requestData) {
 		if(!empty($requestData['Receita']['inicio'])) {
 			$this->beforeSaveBrDate($requestData['Receita']['inicio']);

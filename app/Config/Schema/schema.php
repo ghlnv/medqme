@@ -563,6 +563,30 @@ class AppSchema extends CakeSchema {
 			'null' => true,
 			'default' => NULL,
 		),
+		'token' => array(
+			'type' => 'string',
+			'null' => false,
+			'default' => NULL,
+			'length' => 40,
+			'charset' => 'utf8',
+			'collate' => 'utf8_general_ci'
+		),
+		'android_registration_id' => array(
+			'type' => 'string',
+			'null' => false,
+			'default' => NULL,
+			'length' => 40,
+			'charset' => 'utf8',
+			'collate' => 'utf8_general_ci'
+		),
+		'last_mobile_login' => array(
+			'type' => 'string',
+			'null' => false,
+			'default' => NULL,
+			'length' => 40,
+			'charset' => 'utf8',
+			'collate' => 'utf8_general_ci'
+		),
 		'created' => array(
 			'type' => 'datetime',
 			'null' => true,

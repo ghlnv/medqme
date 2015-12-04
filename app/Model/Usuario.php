@@ -61,6 +61,41 @@ class Usuario extends AppModel {
 	
 	// #########################################################################
 	// Métodos públicos ########################################################
+	public function checkMobileLogin($login, $senha) {
+		$hash = AuthComponent::password($senha);
+		
+		$usuario = $this->find('first', [
+			'fields' => [
+				'id',
+				'login',
+			],
+			'conditions' => [
+				'login' => $login,
+				'senha' => $hash,
+			],
+			'contain' => false
+		]);
+		if(!$usuario) {
+			return false;
+		}
+		$usuario['Usuario']['token'] = AuthComponent::password($login.date('dmY'));
+		$usuario['Usuario']['hash'] = $hash;
+		if(!empty($this->request->data['reg_id'])) {
+			$usuario['Usuario']['android_registration_id'] = $this->request->data['reg_id'];
+		}
+		$usuario['Usuario']['last_mobile_login'] = date('Y-m-d H:i:s');
+		$this->save($usuario);
+		return $usuario;
+	}
+	public function authenticateMobile($hash, $token) {
+		return $this->find('first', [
+			'conditions' => [
+				'senha' => $hash,
+				'token' => $token
+			],
+			'contain' => false,
+		]);
+	}
 	public function cadastrar($usuario) {
 		App::uses('CakeEmail', 'Network/Email');
 		if(!$this->Pessoa->save($usuario['Pessoa'])) {
