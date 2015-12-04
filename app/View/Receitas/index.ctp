@@ -24,6 +24,8 @@ foreach($receitas as $receita) {
 	echo ' | ';
 	echo $receita['Medicamento']['apresentacao_reduzida'];
 	echo $this->Html->tag('div', null, ['class' => 'smallText']);
+	echo $receita['Receita']['dias'];
+	echo ' dia(s) | ';
 	echo $this->Gerar->brDate($receita['Receita']['inicio'], 'd/m/Y');
 	echo ' à ';
 	echo $this->Gerar->brDate($receita['Receita']['termino'], 'd/m/Y');

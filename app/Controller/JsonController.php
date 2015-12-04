@@ -49,6 +49,18 @@ class JsonController extends AppController {
 			JSON_NUMERIC_CHECK
 		)));
 	}
+	public function getMedicamentos() {
+		if(!$this->mobile) {
+			return new CakeResponse(array('body' => json_encode(false, JSON_NUMERIC_CHECK)));
+		}
+		$this->loadModel('Medicamento');
+		return new CakeResponse(array('body' => json_encode(
+			[
+				'Medicamentos' => $this->Medicamento->mobileAll()
+			],
+			JSON_NUMERIC_CHECK
+		)));
+	}
 	
 	// #########################################################################
 	// Métodos privados ########################################################

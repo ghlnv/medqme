@@ -24,6 +24,35 @@ class Medicamento extends AppModel {
 	
 	// #########################################################################
 	// Métodos #################################################################
+	public function mobileAll() {
+		return $this->find('all', [
+			'fields' => [
+				'id',
+				'codigo',
+				'principio_ativo',
+				'laboratorio',
+				'codigo_ggrem',
+				'ean',
+				'nome',
+				'apresentacao',
+				'classe_terapeutica',
+				'dosagem',
+				'unidade',
+				'pf_18',
+				'restricao_hospitalar',
+				'apresentacao_reduzida',
+				'formas_farmaceuticas_solidas',
+				'formas_farmaceuticas_liquidas',
+				'formas_farmaceuticas_semisolidas',
+				'formas_farmaceuticas_gasosas',
+				'vias_de_administracao',
+				'embalagens_primarias',
+				'embalagens_secundarias',
+				'acessorios',
+			],
+			'contain' => false,
+		]);
+	}
 	public function listarPorNomeEDosagem($nome, $dosagemEForma) {
 		$dosagemEFormaExploded = explode(' | ', $dosagemEForma);
 		$dosagemExploded = explode(' ', $dosagemEFormaExploded[0]);
